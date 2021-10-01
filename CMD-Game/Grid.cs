@@ -7,6 +7,7 @@ namespace CMD_Game
 {
     public class Grid
     {
+
         //Criando a Matriz Campo de Jogo
         StatusGrid[,] _CampGame = new StatusGrid[20,20];
 
