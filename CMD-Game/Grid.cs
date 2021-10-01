@@ -4,12 +4,27 @@ using System;
 
 
 namespace CMD_Game
-{
+{ 
     public class Grid
     {
 
         //Criando a Matriz Campo de Jogo
         StatusGrid[,] _CampGame = new StatusGrid[20,20];
+
+        public StatusGrid[,] CampGame 
+        {
+            get 
+             {    
+               return _CampGame; 
+                
+             }
+            
+            set 
+            {
+                _CampGame = value;
+            }
+
+        }
 
         public Grid()
         {
