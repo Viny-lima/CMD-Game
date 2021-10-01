@@ -6,7 +6,12 @@ namespace CMD_Game
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+
+            Grid griGame = new Grid();
+            griGame.PrintGrid();
+
         }
+
     }
+    
 }
