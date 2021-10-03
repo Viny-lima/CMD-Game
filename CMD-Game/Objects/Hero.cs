@@ -1,17 +1,14 @@
 ﻿using CMD_Game.Tipos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CMD_Game.Personagens
 {
-    class Hero
+    class Hero : ObjectGrid
     {
         int _heroHp = 25;
         int _heroScore;
         int _heroDamage = 1;
+        
+
         public int HeroHp
         {
             get
@@ -79,10 +76,7 @@ namespace CMD_Game.Personagens
             }
         }
 
-        public Hero (StatusGrid[,] grid)
-        {
-            grid[0, 0] = StatusGrid.H;
-        }
+        public Hero () : base(GridType.H, 0, 0) { }
 
     }
 }

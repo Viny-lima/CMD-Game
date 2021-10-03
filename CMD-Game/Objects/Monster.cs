@@ -1,13 +1,9 @@
 ﻿using CMD_Game.Tipos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using CMD_Game.FunctionsSystem;
 
 namespace CMD_Game.Personagens
 {
-    class Monster
+    class Monster : ObjectGrid
     {
         int _monsterHp = 5;
         int _monsterDamage = 1;
@@ -22,17 +18,11 @@ namespace CMD_Game.Personagens
 
             set
             {
-                //vida do monstro não pode ser negativa
-                if (_monsterHp >= 0)
+                //A morte do monstro
+                if (_monsterHp <= 0)
                 {
-                    _monsterHp = value;
+                    _grid[_x, _y] = ;
                 }
-
-                else
-                {
-                    _monsterHp = 0;
-                }
-
             }
         }
 
@@ -82,9 +72,9 @@ namespace CMD_Game.Personagens
             }
         }
 
-        public Monster(StatusGrid[,] grid)
+        public Monster(GridType[,] grid)
         {
-            grid[2, 2] = StatusGrid.M;
+            grid[2, 2] = GridType.M;
         }
 
 

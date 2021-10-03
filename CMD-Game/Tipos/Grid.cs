@@ -1,27 +1,26 @@
 ﻿using CMD_Game.FunctionsSystem;
-using CMD_Game.Tipos;
 using System;
+using static CMD_Game.Tipos.ObjectGrid;
 
-
-namespace CMD_Game
+namespace CMD_Game.Tipos
 { 
     public class Grid
     {
 
         //Criando a Matriz Campo de Jogo
-        StatusGrid[,] _CampGame = new StatusGrid[20,20];
+        protected GridType[,] _battleField = new GridType[20,20];
 
-        public StatusGrid[,] CampGame 
+        public GridType[,] BattleField 
         {
             get 
              {    
-               return _CampGame; 
+               return _battleField; 
                 
              }
             
             set 
             {
-                _CampGame = value;
+                _battleField = value;
             }
 
         }
@@ -33,7 +32,7 @@ namespace CMD_Game
             {
                 for(int j = 0; j < 20; j++)
                 {
-                    _CampGame[i, j] = StatusGrid.O;
+                    _battleField[i, j] = GridType.O;
                 }
             }
         }
@@ -47,7 +46,7 @@ namespace CMD_Game
             {
                 for (int j = 0; j < 20; j++)
                 {
-                    SystemFunction.PrintGridColors(this._CampGame[i, j]);
+                    SystemFunction.PrintGridColors(this._battleField[i, j]);
                 }
 
                 //Quebra de linha

@@ -1,5 +1,5 @@
-﻿using CMD_Game.Tipos;
-using System;
+﻿using System;
+using static CMD_Game.Tipos.ObjectGrid;
 
 namespace CMD_Game.FunctionsSystem
 {
@@ -13,10 +13,10 @@ namespace CMD_Game.FunctionsSystem
             }
             Console.WriteLine("");
         }
-
-        //Depois usar ref para variáveis  (ref Player.HeroHp)
+        
         public static void PrintStatusBar(int heroHp,int heroDamage,int heroScore)
         {
+            //Depois usar ref para variáveis  (ref Player.HeroHp)
             CriarLinha(40);
             Console.WriteLine($"Hero HP:{heroHp} Hero Damage:{heroDamage} Hero Score:{heroScore}".PadLeft(39));
             CriarLinha(40);
@@ -29,43 +29,42 @@ namespace CMD_Game.FunctionsSystem
             Console.WriteLine(" [SPACE] to attack.   [ESC} to exit.");
         }
 
-
-        public static void PrintGridColors(StatusGrid typeStatus)
+        public static void PrintGridColors(GridType typeStatus)
         {
             //Mudando as cores no console baseado no type value enum StatusGrid
             switch (typeStatus)
             {
-                case StatusGrid.O:
+                case GridType.O:
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.Write($" {typeStatus}");
                     Console.ResetColor();
                     break;
-                case StatusGrid.H:
+                case GridType.H:
                     Console.ForegroundColor = ConsoleColor.Blue;
                     Console.Write($" {typeStatus}");
                     Console.ResetColor();
                     break;
-                case StatusGrid.B:
+                case GridType.B:
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.Write($" {typeStatus}");
                     Console.ResetColor();
                     break;
-                case StatusGrid.M:
+                case GridType.M:
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.Write($" {typeStatus}");
                     Console.ResetColor();
                     break;
-                case StatusGrid.P:
+                case GridType.P:
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.Write($" {typeStatus}");
                     Console.ResetColor();
                     break;
-                case StatusGrid.W:
+                case GridType.W:
                     Console.ForegroundColor = ConsoleColor.DarkBlue;
                     Console.Write($" {typeStatus}");
                     Console.ResetColor();
                     break;
-                case StatusGrid.D:
+                case GridType.D:
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.Write($" {typeStatus}");
                     Console.ResetColor();
@@ -78,5 +77,13 @@ namespace CMD_Game.FunctionsSystem
                     break;
             }
         }
+
+        public static int RandNum(int minValue, int maxValue)
+        {
+            Random randNum = new Random();
+
+            return (int) randNum.Next(minValue, maxValue);
+        }
+
     }
 }
