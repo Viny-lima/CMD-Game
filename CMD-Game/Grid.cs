@@ -47,7 +47,7 @@ namespace CMD_Game
             {
                 for (int j = 0; j < 20; j++)
                 {
-                    Console.Write($" {this._CampGame[i,j]}");
+                    SystemFunction.PrintGridColors(this._CampGame[i, j]);
                 }
 
                 //Quebra de linha

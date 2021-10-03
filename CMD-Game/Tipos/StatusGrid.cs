@@ -11,9 +11,10 @@ namespace CMD_Game.Tipos
     {
         O = 0,
         H = 1,
-        M = 2,
-        P = 3,
-        W = 4,
-        D = 5
+        B = 2,
+        M = 3,
+        P = 4,
+        W = 5,
+        D = 6
     }
 }
