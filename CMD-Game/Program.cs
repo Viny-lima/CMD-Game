@@ -12,6 +12,8 @@ namespace CMD_Game
             Grid griGame = new Grid();
             Hero hero = new Hero(griGame.CampGame);
             griGame.PrintGrid();
+            
+        
 
         }
 
