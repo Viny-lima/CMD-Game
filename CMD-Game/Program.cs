@@ -17,18 +17,18 @@ namespace CMD_Game
             //Criando os objetos no grid
             Hero hero = new Hero();
             Destiny destiny = new Destiny();
-            Boss monstroChefe = new Boss(SystemFunction.RandNum(2, 17), SystemFunction.RandNum(2, 17));
-            Weapon arma = new Weapon(SystemFunction.RandNum(2, 17), SystemFunction.RandNum(2, 17));
+            Boss monstroChefe = new Boss(SystemFunction.RandNum(3, 18), SystemFunction.RandNum(3, 18));
+            Weapon arma = new Weapon(SystemFunction.RandNum(3, 18), SystemFunction.RandNum(3, 18));
 
             for (int i = 0; i < 8; i++)
             {
-                Poison poison = new Poison(SystemFunction.RandNum(2, 17), SystemFunction.RandNum(2, 17));
+                Poison poison = new Poison(SystemFunction.RandNum(3, 18), SystemFunction.RandNum(3, 18));
             }            
             
             for (int i = 0; i < 6; i++)
             {
-                Monster monstro = new Monster(SystemFunction.RandNum(2, 17), SystemFunction.RandNum(2, 17));
-            }                 
+                Monster monstro = new Monster(SystemFunction.RandNum(3, 18), SystemFunction.RandNum(3, 18));
+            }                
           
 
             while (true)

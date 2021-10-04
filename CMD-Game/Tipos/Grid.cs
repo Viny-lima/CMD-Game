@@ -8,7 +8,7 @@ namespace CMD_Game.Tipos
     {
         //Class responsável pelo preenchimento e atualização da matrix do jogo, exibida no conosole
 
-        protected GridType[,] _battleField = new GridType[20,20];
+        protected GridType[,] _battleField = new GridType[22,22];
 
         public GridType[,] BattleField 
         {
@@ -28,9 +28,9 @@ namespace CMD_Game.Tipos
         public Grid()
         {
             //Construindo com valores padrão/vazio 
-            for (int i = 0; i < 20; i++)
+            for (int i = 1; i < 21; i++)
             {
-                for(int j = 0; j < 20; j++)
+                for(int j = 1; j < 21; j++)
                 {
                     _battleField[i, j] = GridType.O;
                 }
@@ -42,9 +42,9 @@ namespace CMD_Game.Tipos
             SystemFunction.PrintStatusBar(25, 1, 0);
 
             //Imprimindo no Grid no Console
-            for (int i = 0; i < 20; i++)
+            for (int i = 1; i < 21; i++)
             {
-                for (int j = 0; j < 20; j++)
+                for (int j = 1; j < 21; j++)
                 {
                     SystemFunction.PrintGridColors(this._battleField[i, j]);
                 }

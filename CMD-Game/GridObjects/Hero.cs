@@ -79,7 +79,7 @@ namespace CMD_Game.GridObjects
             }
         }
 
-        public Hero () : base(GridType.H, 0, 0) { }
+        public Hero () : base(GridType.H, 1, 1) { }
 
         public void Move( ConsoleKey key)
         {          
@@ -122,6 +122,7 @@ namespace CMD_Game.GridObjects
                     _grid[_x, _y] = _type;
                     Console.WriteLine("> to move left");
                     break;
+
                 case ConsoleKey.S:
                     //[S] to move down                    
                     _grid[_x, _y] = GridType.O;
