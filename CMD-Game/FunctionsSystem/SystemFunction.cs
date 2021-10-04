@@ -60,12 +60,12 @@ namespace CMD_Game.FunctionsSystem
                     Console.ResetColor();
                     break;
                 case GridType.W:
-                    Console.ForegroundColor = ConsoleColor.DarkBlue;
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
                     Console.Write($" {typeStatus}");
                     Console.ResetColor();
                     break;
                 case GridType.D:
-                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.ForegroundColor = ConsoleColor.DarkBlue;
                     Console.Write($" {typeStatus}");
                     Console.ResetColor();
                     break;

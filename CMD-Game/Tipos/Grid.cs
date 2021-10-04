@@ -6,8 +6,8 @@ namespace CMD_Game.Tipos
 { 
     public class Grid
     {
+        //Class responsável pelo preenchimento e atualização da matrix do jogo, exibida no conosole
 
-        //Criando a Matriz Campo de Jogo
         protected GridType[,] _battleField = new GridType[20,20];
 
         public GridType[,] BattleField 

@@ -1,11 +1,10 @@
-﻿using CMD_Game.FunctionsSystem;
-using System;
+﻿
 
 namespace CMD_Game.Tipos
 {
     public class ObjectGrid 
     {
-        //Tipos de valores possíveis na Class
+        /*Class Responsável pela indentificação por tipos e localização dos objetos na matrix*/
         public enum GridType
         {
             O = 0,
@@ -39,8 +38,13 @@ namespace CMD_Game.Tipos
                 2 - Inserimos o Grid o qual ele pertence
                 3 - posição X & Y
             */
-            _x = x;
-            _y = y;
+            if (_grid[x, y] == GridType.O)
+            {
+                //Os objetos só poderam ocupar lugares vazios
+                _x = x;
+                _y = y;
+            }
+
 
             _type = typeValue;
             _grid[x, y] = _type;

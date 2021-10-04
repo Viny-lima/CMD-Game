@@ -1,7 +1,7 @@
 ﻿using CMD_Game.Tipos;
 using System;
 
-namespace CMD_Game.Objects
+namespace CMD_Game.GridObjects
 {
     public class Weapon : ObjectGrid
     {

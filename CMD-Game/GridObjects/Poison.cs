@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CMD_Game.Tipos;
 
-namespace CMD_Game.Personagens
+namespace CMD_Game.GridObjects
 {
-    class Poison
+    public class Poison : ObjectGrid
     {
         int _poisonHp = 6;
 
@@ -32,5 +28,7 @@ namespace CMD_Game.Personagens
 
             }
         }
+
+        public Poison(int x, int y): base(GridType.P,x, y) { }
     }
 }

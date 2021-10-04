@@ -1,6 +1,6 @@
 ﻿using CMD_Game.Tipos;
 
-namespace CMD_Game.Personagens
+namespace CMD_Game.GridObjects
 {
     class Hero : ObjectGrid
     {
