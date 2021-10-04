@@ -60,7 +60,7 @@ namespace CMD_Game.FunctionsSystem
                     Console.ResetColor();
                     break;
                 case GridType.W:
-                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
                     Console.Write($" {typeStatus}");
                     Console.ResetColor();
                     break;

@@ -43,11 +43,9 @@ namespace CMD_Game.Tipos
                 //Os objetos só poderam ocupar lugares vazios
                 _x = x;
                 _y = y;
-            }
-
-
-            _type = typeValue;
-            _grid[x, y] = _type;
+                _type = typeValue;
+                _grid[x, y] = _type;
+            }            
         }
         
         public static void InsertGridUniversal(ref Grid grid)
