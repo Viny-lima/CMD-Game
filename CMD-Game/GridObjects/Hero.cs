@@ -8,7 +8,9 @@ namespace CMD_Game.GridObjects
         int _heroHp = 25;
         int _heroScore;
         int _heroDamage = 1;
-        
+        int c = 1;
+
+
 
         public int HeroHp
         {
@@ -81,21 +83,29 @@ namespace CMD_Game.GridObjects
 
         public void Move( ConsoleKey key)
         {          
-            
+               
+
             switch (key)
             {
                 case ConsoleKey.D:
-                    //[D] to move right                    
-                    _grid[_x, _y] = GridType.O;
-                    _y += 1;
+                    
 
-                    if (_y > 19)
+                   if (_grid[_x,_y +1] == GridType.O)
                     {
-                        //Ele não pode ultrapassar o tamanho do Grid;
-                        _y = 0;
+
+                        _grid[_x, _y] = GridType.O;
+                        _y++;
+                       
+                        if (_y >18 )
+                        {
+
+                            _y = 0;
+                             
+                        }
+                       
+                        _grid[_x, _y] = _type;
+                        
                     }
-                    _grid[_x, _y] = _type;
-                    Console.WriteLine("> to move right");
                                             
                     break;
 
