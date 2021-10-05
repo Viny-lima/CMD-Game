@@ -19,14 +19,14 @@ namespace CMD_Game.GridObjects
             
         }
 
-        public void Move(ConsoleKey key, ObjectGrid[,] grid)
+        public void Move(ConsoleKey key, ref ObjectGrid[,] grid)
         {
             ObjectGrid right = grid[x, y + 1];
             ObjectGrid left = grid[x, y - 1];
             ObjectGrid donw = grid[x + 1, y];
             ObjectGrid top = grid[x - 1, y];
 
-            if (key == ConsoleKey.A || key == ConsoleKey.D || key == ConsoleKey.W || key == ConsoleKey.S)
+            if (key == ConsoleKey.A || key == ConsoleKey.D || key == ConsoleKey.W || key == ConsoleKey.S || key == ConsoleKey.Spacebar)
             {
 
                 switch (SystemFunction.RandNum(1,4))
@@ -37,17 +37,16 @@ namespace CMD_Game.GridObjects
                         {
 
                             grid[x, y]._type = GridType.O;
-                            y++;
+                            y ++;
 
-                            if (y > 18)
+                            if (y > 20)
                             {
 
-                                y = 3;
+                                y = 20;
 
                             }
 
                             grid[x, y]._type = _type;
-
                         }
 
                         break;
@@ -57,15 +56,14 @@ namespace CMD_Game.GridObjects
                         {
                             //[A] to move right                    
                             grid[x, y]._type = GridType.O;
-                            y -= 1;
+                            y --;
 
-                            if (y < 3)
+                            if (y < 1)
                             {
                                 //Ele não pode ultrapassar o tamanho do Grid;
-                                y = 18;
+                                y = 1;
                             }
                             grid[x, y]._type = _type;
-                            Console.WriteLine("> to move left");
                         }
 
                         break;
@@ -75,15 +73,14 @@ namespace CMD_Game.GridObjects
                         {
                             //[S] to move down                    
                             grid[x, y]._type = GridType.O;
-                            x += 1;
+                            x ++;
 
-                            if (x > 18)
+                            if (x > 20)
                             {
                                 //Ele não pode ultrapassar o tamanho do Grid;
-                                x = 3;
+                                x = 20;
                             }
                             grid[x, y]._type = _type;
-                            Console.WriteLine("> to move down");
                         }
                         break;
 
@@ -92,20 +89,39 @@ namespace CMD_Game.GridObjects
                         {
                             //[W] to move up                 
                             grid[x, y]._type = GridType.O;
-                            x -= 1;
+                            x --;
 
-                            if (x < 3)
+                            if (x < 1)
                             {
                                 //Ele não pode ultrapassar o tamanho do Grid;
-                                y = 18;
+                                x = 1;
                             }
                             grid[x, y]._type = _type;
-                            Console.WriteLine("> to move up");
                         }
                         break;
                 }
-            }
 
+                //Mostros batem em Hero
+                if (right._type == GridType.H)
+                {
+                    right.hp -= this.damage;
+                }
+                if (left._type == GridType.H)
+                {
+                    left.hp -= this.damage;
+                }
+                if (donw._type == GridType.H)
+                {
+                    donw.hp -= this.damage;
+                }
+                if (top._type == GridType.H)
+                {
+                    top.hp -= this.damage;
+                }
+
+            }
+            
+            
         }
 
     }

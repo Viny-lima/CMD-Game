@@ -43,7 +43,16 @@ namespace CMD_Game
                 Console.WriteLine("A posição do boss: " + boss.hp);
                 Console.Write("A Posição do hero: " + hero.Position);
                 ConsoleKey key = Console.ReadKey().Key;
-                hero.Control(key, ref battleField);
+
+                hero.Control(key, ref battleField);//Ação do jogador
+                //Monstros em direção Aletória
+                
+                foreach(Monster monster in monsters)
+                {
+                    monster.Move(key,ref battleField);
+                }
+                boss.Move(key, ref battleField);
+                
             }
             
 

@@ -156,7 +156,7 @@ namespace CMD_Game.GridObjects
             }
         }
 
-        public virtual void React( )
+        public virtual void React()
         {
 
         }
