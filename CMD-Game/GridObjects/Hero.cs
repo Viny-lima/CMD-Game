@@ -10,9 +10,12 @@ namespace CMD_Game.GridObjects
         public uint damage = 1;        
         
 
-        public Hero () : base(GridType.H, 1, 1) { }
+        public Hero (ObjectGrid[,] grid) : base(1, 1, GridType.H) 
+        {
+            grid[_x, _y]._type = this._type; 
+        }
 
-        public override void Move(ConsoleKey key)
+        public override void Move(ConsoleKey key, ObjectGrid[,] grid)
         {
             //O Herói perde vida quando se move
             if(hp > 0)
@@ -25,10 +28,10 @@ namespace CMD_Game.GridObjects
                 case ConsoleKey.D:
 
 
-                    if (_grid[_x, _y + 1] == GridType.O)
+                    if (grid[_x, _y + 1]._type == GridType.O)
                     {
 
-                        _grid[_x, _y] = GridType.O;
+                        grid[_x, _y]._type = GridType.O;
                         _y++;
 
                         if (_y > 20)
@@ -38,17 +41,17 @@ namespace CMD_Game.GridObjects
 
                         }
 
-                        _grid[_x, _y] = _type;
+                        grid[_x, _y]._type = _type;
 
                     }
 
                     break;
 
                 case ConsoleKey.A:
-                    if (_grid[_x, _y - 1] == GridType.O)
+                    if (grid[_x, _y - 1]._type == GridType.O)
                     {
                         //[A] to move right                    
-                        _grid[_x, _y] = GridType.O;
+                        grid[_x, _y]._type = GridType.O;
                         _y -= 1;
 
                         if (_y < 1)
@@ -56,17 +59,17 @@ namespace CMD_Game.GridObjects
                             //Ele não pode ultrapassar o tamanho do Grid;
                             _y = 20;
                         }
-                        _grid[_x, _y] = _type;
+                        grid[_x, _y]._type = _type;
                         Console.WriteLine("> to move left");
                     }
 
                     break;
 
                 case ConsoleKey.S:
-                    if (_grid[_x + 1, _y] == GridType.O)
+                    if (grid[_x + 1, _y]._type == GridType.O)
                     {
                         //[S] to move down                    
-                        _grid[_x, _y] = GridType.O;
+                        grid[_x, _y]._type = GridType.O;
                         _x += 1;
 
                         if (_x > 20)
@@ -74,16 +77,16 @@ namespace CMD_Game.GridObjects
                             //Ele não pode ultrapassar o tamanho do Grid;
                             _x = 1;
                         }
-                        _grid[_x, _y] = _type;
+                        grid[_x, _y]._type = _type;
                         Console.WriteLine("> to move down");
                     }
                     break;
 
                 case ConsoleKey.W:
-                    if (_grid[_x - 1, _y] == GridType.O)
+                    if (grid[_x - 1, _y]._type == GridType.O)
                     {
                         //[W] to move up                 
-                        _grid[_x, _y] = GridType.O;
+                        grid[_x, _y]._type = GridType.O;
                         _x -= 1;
 
                         if (_x < 1)
@@ -91,36 +94,21 @@ namespace CMD_Game.GridObjects
                             //Ele não pode ultrapassar o tamanho do Grid;
                             _x = 20;
                         }
-                        _grid[_x, _y] = _type;
+                        grid[_x, _y]._type = _type;
                         Console.WriteLine("> to move up");
                     }
                     break;
 
                 case ConsoleKey.Escape:
-
                     Program.FLAG = false;
-
                     break;
 
-                case ConsoleKey.Backspace:
-
-                    
-
+                case ConsoleKey.Backspace:                  
                     break;
 
 
             }
-        }
-
-        //Em testes
-        public void SearchMonster()
-        {
-            GridType up = _grid[_x - 1, _y];
-            GridType dow = _grid[_x + 1, _y];
-            GridType left = _grid[_x, _y + 1];
-            GridType right = _grid[_x, _y -1];
-
-        }
+        }        
 
     }   
 }

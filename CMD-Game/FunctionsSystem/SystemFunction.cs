@@ -1,4 +1,5 @@
 ﻿using CMD_Game.GridObjects;
+using CMD_Game.Tipos;
 using System;
 using static CMD_Game.Tipos.ObjectGrid;
 
@@ -13,15 +14,8 @@ namespace CMD_Game.FunctionsSystem
                 Console.Write($"=");
             }
             Console.WriteLine("");
-        }
+        }       
         
-        public static void PrintStatusBar(ref uint heroHp, ref uint heroDamage, ref uint heroScore)
-        {
-            //Depois usar ref para variáveis  (ref Player.HeroHp)
-            CriarLinha(40);
-            Console.WriteLine($"Hero HP:{heroHp} Hero Damage:{heroDamage} Hero Score:{heroScore}".PadLeft(39));
-            CriarLinha(40);
-        }
 
         public static void PrintControl()
         {
@@ -29,6 +23,7 @@ namespace CMD_Game.FunctionsSystem
             Console.WriteLine(" [W] to move up.      [S] to move down.");
             Console.WriteLine(" [SPACE] to attack.   [ESC} to exit.");
         }
+
 
         public static void PrintGridColors(GridType typeStatus)
         {
@@ -79,6 +74,7 @@ namespace CMD_Game.FunctionsSystem
             }
         }
 
+
         public static int RandNum(int minValue, int maxValue)
         {
             Random randNum = new Random();
@@ -86,6 +82,51 @@ namespace CMD_Game.FunctionsSystem
             return (int) randNum.Next(minValue, maxValue);
         }
 
+
+        public static void PrintStatusBar(ref uint heroHp, ref uint heroDamage, ref uint heroScore)
+        {
+            //Depois usar ref para variáveis  (ref Player.HeroHp)
+            CriarLinha(40);
+            Console.WriteLine($"Hero HP:{heroHp} Hero Damage:{heroDamage} Hero Score:{heroScore}".PadLeft(39));
+            CriarLinha(40);
+        }
+
+
+        public static void PrintGrid(ObjectGrid[,] grid)
+        {
+
+            //Imprimindo no Grid no Console
+            for (int i = 1; i <= 20; i++)
+            {
+                for (int j = 1; j <= 20; j++)
+                {
+                    PrintGridColors(grid[i, j]._type);
+                }
+
+                //Quebra de linha
+                Console.WriteLine("");
+            }
+
+            SystemFunction.CriarLinha(40);
+            SystemFunction.PrintControl();
+            SystemFunction.CriarLinha(40);
+        }
+
+
+        public static void StartGrid(ObjectGrid[,] grid)
+        {
+            //Com o tipo valor interno vazio em sua construção            
+
+            for (int i = 0; i <= 21; i++)
+            {
+                for (int j = 0; j <= 21; j++)
+                {
+                    grid[i, j] = new ObjectGrid(i, j);
+                }
+            }
+        }
+
+        /*
         //Em fase de teste
         public static void duelMonster(Monster monster, Hero hero)
         {
@@ -95,7 +136,7 @@ namespace CMD_Game.FunctionsSystem
             } 
             else if (monster.hp == 0)
             {
-                _grid[monster._x,monster._y] = GridType.O;
+                grid[monster._x,monster._y] = GridType.O;
                 hero.score += monster.points;
             }
 
@@ -118,7 +159,7 @@ namespace CMD_Game.FunctionsSystem
             }
             else if (boss.hp == 0)
             {
-                _grid[boss._x, boss._y] = GridType.O;
+                grid[boss._x, boss._y] = GridType.O;
                 hero.score += boss.points;
             }
 
@@ -129,9 +170,10 @@ namespace CMD_Game.FunctionsSystem
             else if (hero.hp == 0)
             {
                 //Se a vida do herói zerar o programa deve fechar
-                _grid[hero._x, hero._y] = GridType.O;
+                grid[hero._x, hero._y] = GridType.O;
                 Program.FLAG = false;
             }
         }
+        */
     }
 }
