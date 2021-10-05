@@ -6,39 +6,13 @@ namespace CMD_Game.GridObjects
 {
     public class Monster : ObjectGrid
     {
-        int _monsterHp;
-        int _monsterDamage;
-        int _valuePoints;
+        public uint hp = 5;
+        public uint damage = 1;
+        public uint points = 5;
 
-        public int MonsterHp
-        {
-            get
-            {
-                return _monsterHp;
-            }
 
-            set
-            {
-                //A morte do monstro
-                if (_monsterHp <= 0)
-                {
-                    //Na sua localização se torna vazia
-                    _grid[_x, _y] = GridType.O;
-                } 
-                else
-                {
-                    _monsterHp = value;
-                }
-            }
-        }
 
-        public Monster(int x, int y, int hp = 5, int damage = 1, int points = 5) : base (GridType.M, x, y)
-        {
-            _monsterHp = hp;
-            _monsterDamage = damage;
-            _valuePoints = points;
-        }   
-
+        public Monster(int x, int y) : base (GridType.M, x, y) { }
         public override void Move(ConsoleKey key)
 
         {

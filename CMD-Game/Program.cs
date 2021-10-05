@@ -32,10 +32,12 @@ namespace CMD_Game
                 Monster monstro = new Monster(SystemFunction.RandNum(3, 18), SystemFunction.RandNum(3, 18));
                 monsters[i] = monstro;
             }
+
             while (FLAG)
             {
 
                 Console.Clear();
+                SystemFunction.PrintStatusBar(ref hero.hp, ref hero.damage, ref hero.score);
                 griGame.PrintGrid();
                 Console.Write("A Posição do hero: " + hero.Position);
                 ConsoleKey key = Console.ReadKey().Key;

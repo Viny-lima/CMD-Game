@@ -38,8 +38,7 @@ namespace CMD_Game.Tipos
         }
         
         public void PrintGrid()
-        {
-            SystemFunction.PrintStatusBar(25, 1, 0);
+        {           
 
             //Imprimindo no Grid no Console
             for (int i = 1; i < 21; i++)

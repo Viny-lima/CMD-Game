@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CMD_Game.GridObjects;
+using System;
 using static CMD_Game.Tipos.ObjectGrid;
 
 namespace CMD_Game.FunctionsSystem
@@ -14,7 +15,7 @@ namespace CMD_Game.FunctionsSystem
             Console.WriteLine("");
         }
         
-        public static void PrintStatusBar(int heroHp,int heroDamage,int heroScore)
+        public static void PrintStatusBar(ref uint heroHp, ref uint heroDamage, ref uint heroScore)
         {
             //Depois usar ref para variáveis  (ref Player.HeroHp)
             CriarLinha(40);
@@ -85,5 +86,52 @@ namespace CMD_Game.FunctionsSystem
             return (int) randNum.Next(minValue, maxValue);
         }
 
+        //Em fase de teste
+        public static void duelMonster(Monster monster, Hero hero)
+        {
+            if (monster.hp > 0)
+            {
+                monster.hp -= hero.damage;
+            } 
+            else if (monster.hp == 0)
+            {
+                _grid[monster._x,monster._y] = GridType.O;
+                hero.score += monster.points;
+            }
+
+            if (hero.hp > 0)
+            {
+                hero.hp -= monster.damage;
+            }
+            else if (hero.hp == 0)
+            {
+                //Se a vida do herói zerar o programa deve fechar
+                Program.FLAG = false;
+            }            
+        }
+
+        public static void duelBoss(Boss boss, Hero hero)
+        {
+            if (boss.hp > 0)
+            {
+                boss.hp -= hero.damage;
+            }
+            else if (boss.hp == 0)
+            {
+                _grid[boss._x, boss._y] = GridType.O;
+                hero.score += boss.points;
+            }
+
+            if (hero.hp > 0)
+            {
+                hero.hp -= boss.damage;
+            }
+            else if (hero.hp == 0)
+            {
+                //Se a vida do herói zerar o programa deve fechar
+                _grid[hero._x, hero._y] = GridType.O;
+                Program.FLAG = false;
+            }
+        }
     }
 }
