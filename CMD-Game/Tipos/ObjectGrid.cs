@@ -1,5 +1,7 @@
 ﻿
 
+using System;
+
 namespace CMD_Game.Tipos
 {
     public class ObjectGrid 
@@ -17,9 +19,10 @@ namespace CMD_Game.Tipos
         }
 
         static protected GridType[,] _grid;
+       
 
         protected int _x;
-        protected int _y;
+        protected int _y;       
         protected GridType _type;
         
 
@@ -52,7 +55,98 @@ namespace CMD_Game.Tipos
         {
             //Método que insere um Grid padrão a todos os objetos
             _grid = grid.BattleField;
-        }        
+        }
 
+        public virtual void Move(ConsoleKey key)
+        {
+
+
+            switch (key)
+            {
+                case ConsoleKey.D:
+
+
+                    if (_grid[_x, _y + 1] == GridType.O)
+                    {
+
+                        _grid[_x, _y] = GridType.O;
+                        _y++;
+
+                        if (_y > 20)
+                        {
+
+                            _y = 1;
+
+                        }
+
+                        _grid[_x, _y] = _type;
+
+                    }
+
+                    break;
+
+                case ConsoleKey.A:
+                    if (_grid[_x, _y - 1] == GridType.O)
+                    {
+                        //[A] to move right                    
+                        _grid[_x, _y] = GridType.O;
+                        _y -= 1;
+
+                        if (_y < 1)
+                        {
+                            //Ele não pode ultrapassar o tamanho do Grid;
+                            _y = 20;
+                        }
+                        _grid[_x, _y] = _type;
+                        Console.WriteLine("> to move left");
+                    }
+
+                    break;
+
+                case ConsoleKey.S:
+                    if (_grid[_x + 1, _y] == GridType.O)
+                    {
+                        //[S] to move down                    
+                        _grid[_x, _y] = GridType.O;
+                        _x += 1;
+
+                        if (_x > 20)
+                        {
+                            //Ele não pode ultrapassar o tamanho do Grid;
+                            _x = 1;
+                        }
+                        _grid[_x, _y] = _type;
+                        Console.WriteLine("> to move down");
+                    }
+                    break;
+
+                case ConsoleKey.W:
+                    if (_grid[_x - 1, _y] == GridType.O)
+                    {
+                        //[W] to move up                 
+                        _grid[_x, _y] = GridType.O;
+                        _x -= 1;
+
+                        if (_x < 1)
+                        {
+                            //Ele não pode ultrapassar o tamanho do Grid;
+                            _y = 20;
+                        }
+                        _grid[_x, _y] = _type;
+                        Console.WriteLine("> to move up");
+                    }
+                    break;
+
+                case ConsoleKey.Escape:
+
+                    Program.FLAG = false;
+                                                                                               
+                    break;
+
+
+            }
+           
+
+        }
     }
 }
