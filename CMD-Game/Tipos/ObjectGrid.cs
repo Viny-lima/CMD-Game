@@ -22,8 +22,13 @@ namespace CMD_Game.Tipos
         public GridType _type;
 
         protected int _x;
-        protected int _y;      
-        
+        protected int _y;
+
+
+        public (int, int) Position
+        {
+            get => (_x, _y);
+        }
 
         public ObjectGrid(int x, int y, GridType typeValue = GridType.O)
         {            

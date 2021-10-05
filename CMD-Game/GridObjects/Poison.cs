@@ -29,6 +29,9 @@ namespace CMD_Game.GridObjects
             }
         }
 
-        public Poison(int x, int y, ObjectGrid[,] grid): base(x, y, GridType.P) { }
+        public Poison(int x, int y, ObjectGrid[,] grid) : base(x, y, GridType.P)
+        {
+            grid[_x, _y]._type = this._type;
+        }
     }
 }

@@ -12,7 +12,11 @@ namespace CMD_Game.GridObjects
 
 
 
-        public Monster(int x, int y, ObjectGrid[,] grid) : base (x, y, GridType.M) { }
+        public Monster(int x, int y, ObjectGrid[,] grid) : base (x, y, GridType.M) 
+        {
+            grid[_x, _y]._type = this._type;
+        }
+
         public override void Move(ConsoleKey key, ObjectGrid[,] grid)
 
         {

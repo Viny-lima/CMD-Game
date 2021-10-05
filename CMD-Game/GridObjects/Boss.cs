@@ -13,7 +13,10 @@ namespace CMD_Game.GridObjects
         public uint points = 15;
 
 
-        public Boss(int x, int y, ObjectGrid[,] grid) : base(x, y, GridType.B) { }
+        public Boss(int x, int y, ObjectGrid[,] grid) : base(x, y, GridType.B)
+        {
+            grid[_x, _y]._type = this._type;
+        }
         
         public override void Move(ConsoleKey key, ObjectGrid[,] grid)
 
