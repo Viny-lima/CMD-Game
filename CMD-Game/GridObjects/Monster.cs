@@ -6,20 +6,26 @@ namespace CMD_Game.GridObjects
 {
     public class Monster : ObjectGrid
     {
-        public uint hp = 5;
-        public uint damage = 1;
-        public uint points = 5;
-
-
-
-        public Monster(int x, int y, ObjectGrid[,] grid) : base (x, y, GridType.M) 
+        public Monster(int x, int y, ObjectGrid[,] grid,GridType type = GridType.M, int hp = 5, int damage = 1, int points = 10) : base (x, y, type, hp, damage, points) 
         {
-            grid[_x, _y]._type = this._type;
+            if(grid[base.x, base.y]._type == GridType.O)
+            {
+                //SetValue()
+                grid[base.x, base.y]._type = this._type;
+                grid[base.x, base.y].hp = this.hp;
+                grid[base.x, base.y].damage = this.damage;
+                grid[base.x, base.y].points = this.points;
+            }
+            
         }
 
-        public override void Move(ConsoleKey key, ObjectGrid[,] grid)
-
+        public void Move(ConsoleKey key, ObjectGrid[,] grid)
         {
+            ObjectGrid right = grid[x, y + 1];
+            ObjectGrid left = grid[x, y - 1];
+            ObjectGrid donw = grid[x + 1, y];
+            ObjectGrid top = grid[x - 1, y];
+
             if (key == ConsoleKey.A || key == ConsoleKey.D || key == ConsoleKey.W || key == ConsoleKey.S)
             {
 
@@ -27,73 +33,73 @@ namespace CMD_Game.GridObjects
                 {
                     case 1:
 
-                        if (grid[_x, _y + 1]._type == GridType.O)
+                        if (right._type == GridType.O)
                         {
 
-                            grid[_x, _y]._type = GridType.O;
-                            _y++;
+                            grid[x, y]._type = GridType.O;
+                            y++;
 
-                            if (_y > 18)
+                            if (y > 18)
                             {
 
-                                _y = 3;
+                                y = 3;
 
                             }
 
-                            grid[_x, _y]._type = _type;
+                            grid[x, y]._type = _type;
 
                         }
 
                         break;
 
                     case 2:
-                        if (grid[_x, _y - 1]._type == GridType.O)
+                        if (left._type == GridType.O)
                         {
                             //[A] to move right                    
-                            grid[_x, _y]._type = GridType.O;
-                            _y -= 1;
+                            grid[x, y]._type = GridType.O;
+                            y -= 1;
 
-                            if (_y < 3)
+                            if (y < 3)
                             {
                                 //Ele não pode ultrapassar o tamanho do Grid;
-                                _y = 18;
+                                y = 18;
                             }
-                            grid[_x, _y]._type = _type;
+                            grid[x, y]._type = _type;
                             Console.WriteLine("> to move left");
                         }
 
                         break;
 
                     case 3:
-                        if (grid[_x + 1, _y]._type == GridType.O)
+                        if (donw._type == GridType.O)
                         {
                             //[S] to move down                    
-                            grid[_x, _y]._type = GridType.O;
-                            _x += 1;
+                            grid[x, y]._type = GridType.O;
+                            x += 1;
 
-                            if (_x > 18)
+                            if (x > 18)
                             {
                                 //Ele não pode ultrapassar o tamanho do Grid;
-                                _x = 3;
+                                x = 3;
                             }
-                            grid[_x, _y]._type = _type;
+                            grid[x, y]._type = _type;
                             Console.WriteLine("> to move down");
                         }
                         break;
 
                     case 4:
-                        if (grid[_x - 1, _y]._type == GridType.O)
+                        if (top._type == GridType.O)
                         {
                             //[W] to move up                 
-                            grid[_x, _y]._type = GridType.O;
-                            _x -= 1;
+                            grid[x, y]._type = GridType.O;
+                            x -= 1;
 
-                            if (_x < 3)
+                            if (x < 3)
                             {
                                 //Ele não pode ultrapassar o tamanho do Grid;
-                                _y = 18;
+                                y = 18;
                             }
-                            grid[_x, _y]._type = _type;
+                            grid[x, y]._type = _type;
                             Console.WriteLine("> to move up");
                         }
                         break;

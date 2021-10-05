@@ -5,7 +5,7 @@ using static CMD_Game.Tipos.ObjectGrid;
 
 namespace CMD_Game.FunctionsSystem
 {
-    public class SystemFunction
+    public static class SystemFunction
     {
         public static void CriarLinha(int Tamanho)
         {            
@@ -83,7 +83,7 @@ namespace CMD_Game.FunctionsSystem
         }
 
 
-        public static void PrintStatusBar(ref uint heroHp, ref uint heroDamage, ref uint heroScore)
+        public static void PrintStatusBar(ref int heroHp, ref int heroDamage, ref int heroScore)
         {
             //Depois usar ref para variáveis  (ref Player.HeroHp)
             CriarLinha(40);
@@ -121,59 +121,35 @@ namespace CMD_Game.FunctionsSystem
             {
                 for (int j = 0; j <= 21; j++)
                 {
-                    grid[i, j] = new ObjectGrid(i, j);
+                    grid[i, j] = new ObjectGrid(i, j, GridType.O);
                 }
             }
         }
 
-        /*
-        //Em fase de teste
-        public static void duelMonster(Monster monster, Hero hero)
+        
+        
+        public static void Battle(ObjectGrid  monster , Hero hero, ObjectGrid[,] grid)
         {
-            if (monster.hp > 0)
+            if (monster.hp <= 1)
+            {
+                monster._type = GridType.O;
+                hero.points += monster.points;
+            } 
+            else
             {
                 monster.hp -= hero.damage;
-            } 
-            else if (monster.hp == 0)
-            {
-                grid[monster._x,monster._y] = GridType.O;
-                hero.score += monster.points;
             }
 
-            if (hero.hp > 0)
-            {
-                hero.hp -= monster.damage;
-            }
-            else if (hero.hp == 0)
+            if (hero.hp <= 1)
             {
                 //Se a vida do herói zerar o programa deve fechar
                 Program.FLAG = false;
+            }
+            else
+            {
+                hero.hp -= monster.damage;
             }            
         }
 
-        public static void duelBoss(Boss boss, Hero hero)
-        {
-            if (boss.hp > 0)
-            {
-                boss.hp -= hero.damage;
-            }
-            else if (boss.hp == 0)
-            {
-                grid[boss._x, boss._y] = GridType.O;
-                hero.score += boss.points;
-            }
-
-            if (hero.hp > 0)
-            {
-                hero.hp -= boss.damage;
-            }
-            else if (hero.hp == 0)
-            {
-                //Se a vida do herói zerar o programa deve fechar
-                grid[hero._x, hero._y] = GridType.O;
-                Program.FLAG = false;
-            }
-        }
-        */
     }
 }

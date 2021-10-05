@@ -21,25 +21,26 @@ namespace CMD_Game.Tipos
         }
         public GridType _type;
 
-        protected int _x;
-        protected int _y;
-
+        public int x;
+        public int y;
+        public int hp;
+        public int damage;
+        public int points;
 
         public (int, int) Position
         {
-            get => (_x, _y);
+            get => (x, y);
         }
 
-        public ObjectGrid(int x, int y, GridType typeValue = GridType.O)
-        {            
-            
-                //Se na poção do Array Universal o tipo for vazio será adiconado um novo tipo baseado no obj construido.              
-                this._x = x;
-                this._y = y;
+        public ObjectGrid(int x, int y, GridType typeValue , int hp = 0, int damage = 0,  int points = 0)
+        {                                                
+                this.x = x;
+                this.y = y;
+                this.hp = hp;
+                this.damage = damage;
+                this.points = points;
                 this._type = typeValue;            
-        }        
-        
-        public virtual void Move(ConsoleKey key, ObjectGrid[,] grid) { }
+        }                 
         
     }
 }

@@ -1,114 +1,165 @@
-﻿using CMD_Game.Tipos;
+﻿using CMD_Game.FunctionsSystem;
+using CMD_Game.Tipos;
 using System;
 
 namespace CMD_Game.GridObjects
 {
     public class Hero : ObjectGrid
-    {
-        public uint hp = 25;
-        public uint score;
-        public uint damage = 1;        
-        
-
-        public Hero (ObjectGrid[,] grid) : base(1, 1, GridType.H) 
+    {       
+                    
+        public Hero (ObjectGrid[,] grid) : base(1, 1, GridType.H, 100, 1, 0) 
         {
-            grid[_x, _y]._type = this._type; 
+            //SetValue()
+            grid[x, y]._type = this._type;
+            grid[x, y].damage = this.damage;
+            grid[x, y].hp = this.hp;
+            grid[x, y].points = this.points;
         }
 
-        public override void Move(ConsoleKey key, ObjectGrid[,] grid)
+        public void Control(ConsoleKey key, ref ObjectGrid[,] grid)
         {
             //O Herói perde vida quando se move
-            if(hp > 0)
-            {
-                hp--;
-            }
+            ObjectGrid right = grid[x, y + 1];
+            ObjectGrid left = grid[x, y - 1];
+            ObjectGrid donw = grid[x + 1, y];
+            ObjectGrid top = grid[x - 1, y];
 
             switch (key)
             {
                 case ConsoleKey.D:
-
-
-                    if (grid[_x, _y + 1]._type == GridType.O)
+                    if (right._type == GridType.O)
                     {
 
-                        grid[_x, _y]._type = GridType.O;
-                        _y++;
+                        grid[x, y]._type = GridType.O;
+                        y++;
 
-                        if (_y > 20)
+                        if (y > 20)
                         {
 
-                            _y = 1;
+                            y = 20;
+
+                        } 
+                        else
+                        {
+                            if (hp > 0)
+                            {
+                                hp--;
+                            }
 
                         }
 
-                        grid[_x, _y]._type = _type;
-
-                    }
-
+                        grid[x, y]._type = _type;
+                    }                    
                     break;
 
                 case ConsoleKey.A:
-                    if (grid[_x, _y - 1]._type == GridType.O)
+                    if (left._type == GridType.O)
                     {
                         //[A] to move right                    
-                        grid[_x, _y]._type = GridType.O;
-                        _y -= 1;
+                        grid[x, y]._type = GridType.O;
+                        y -= 1;
 
-                        if (_y < 1)
+                        if (y < 1)
                         {
                             //Ele não pode ultrapassar o tamanho do Grid;
-                            _y = 20;
+                            y = 1;
                         }
-                        grid[_x, _y]._type = _type;
-                        Console.WriteLine("> to move left");
-                    }
+                        else
+                        {
+                            if (hp > 0)
+                            {
+                                hp--;
+                            }
 
+                        }
+                        grid[x, y]._type = _type;
+                        Console.WriteLine("> to move left");
+                    }                    
                     break;
 
                 case ConsoleKey.S:
-                    if (grid[_x + 1, _y]._type == GridType.O)
+                    if (donw._type == GridType.O)
                     {
                         //[S] to move down                    
-                        grid[_x, _y]._type = GridType.O;
-                        _x += 1;
+                        grid[x, y]._type = GridType.O;
+                        x += 1;
 
-                        if (_x > 20)
+                        if (x > 20)
                         {
                             //Ele não pode ultrapassar o tamanho do Grid;
-                            _x = 1;
+                            x = 20;
                         }
-                        grid[_x, _y]._type = _type;
+                        else
+                        {
+                            if (hp > 0)
+                            {
+                                hp--;
+                            }
+
+                        }
+                        grid[x, y]._type = _type;
                         Console.WriteLine("> to move down");
                     }
                     break;
 
                 case ConsoleKey.W:
-                    if (grid[_x - 1, _y]._type == GridType.O)
+                    if (top._type == GridType.O)
                     {
                         //[W] to move up                 
-                        grid[_x, _y]._type = GridType.O;
-                        _x -= 1;
+                        grid[x, y]._type = GridType.O;
+                        x -= 1;
 
-                        if (_x < 1)
+                        if (x < 1)
                         {
                             //Ele não pode ultrapassar o tamanho do Grid;
-                            _x = 20;
+                            x = 1;
                         }
-                        grid[_x, _y]._type = _type;
+                        else
+                        {
+                            if (hp > 0)
+                            {
+                                hp--;
+                            }
+                        }
+                        grid[x, y]._type = _type;
                         Console.WriteLine("> to move up");
-                    }
+                    }                 
+
                     break;
 
                 case ConsoleKey.Escape:
                     Program.FLAG = false;
                     break;
 
-                case ConsoleKey.Backspace:                  
+                case ConsoleKey.Spacebar:
+                    //Antes de atacar o hero deve verificar se há mosntros ao redor                                 
+
+                    if (top._type == GridType.M || top._type == GridType.B)
+                    {                        
+                        SystemFunction.Battle(top, this, grid);
+                    }
+                    if (donw._type == GridType.M || donw._type == GridType.B)
+                    {
+                        SystemFunction.Battle(donw, this, grid);
+                    }
+                    if (left._type == GridType.M || left._type == GridType.B)
+                    {
+                        SystemFunction.Battle(left, this, grid);
+                    }
+                    if (right._type == GridType.M || right._type == GridType.B)
+                    {
+                        SystemFunction.Battle(right, this, grid);
+                    }
                     break;
 
 
             }
-        }        
+        }
+
+        public virtual void React( )
+        {
+
+        }
 
     }   
 }

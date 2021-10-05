@@ -3,35 +3,16 @@
 namespace CMD_Game.GridObjects
 {
     public class Poison : ObjectGrid
-    {
-        int _poisonHp = 6;
+    {       
 
-        public int PoisonHp 
+        public Poison(int x, int y, ObjectGrid[,] grid) : base(x, y, GridType.P, 6)
         {
-            get
+            if (grid[base.x, base.y]._type == GridType.O)
             {
-                return _poisonHp;
-            }
-
-            set
-            {
-                //restaura a vida do heroi em 6 pontos
-                if (_poisonHp == 6)
-                {
-                    _poisonHp = value;
-                }
-
-                else
-                {
-                    _poisonHp = 0;
-                }
-
-            }
-        }
-
-        public Poison(int x, int y, ObjectGrid[,] grid) : base(x, y, GridType.P)
-        {
-            grid[_x, _y]._type = this._type;
+                //SetValue()
+                grid[base.x, base.y]._type = this._type;
+                grid[base.x, base.y].hp = this.hp;
+            }                
         }
     }
 }

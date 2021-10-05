@@ -7,7 +7,7 @@ namespace CMD_Game.GridObjects
     {
         public Destiny(ObjectGrid [,] grid) : base(20, 20, GridType.D) 
         {
-            grid[_x, _y]._type = this._type;
+            grid[x, y]._type = this._type;
         }
 
     }
