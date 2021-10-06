@@ -160,11 +160,9 @@ namespace CMD_Game.FunctionsSystem
         public static void PrintScore(Hero hero)
         {
             Console.Clear();
-            Console.BackgroundColor = ConsoleColor.Yellow;
+            Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Black;
-            Console.WriteLine("==========================================================");
-            Console.WriteLine($"=        VOCÊ VENCEU ! SCORE{hero.points + hero.hp}      =");
-            Console.WriteLine("==========================================================");
+            Console.WriteLine($">>>       VOCÊ VENCEU ! SCORE: {hero.points + hero.hp}      <<<");
             Console.ResetColor();
         }
 
