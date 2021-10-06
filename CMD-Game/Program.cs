@@ -15,44 +15,48 @@ namespace CMD_Game
             ObjectGrid[,] battleField = new ObjectGrid[22, 22]; //Grid Game
             SystemFunction.StartGrid(battleField); //Set  values in  grid
 
-            Hero hero = new Hero(battleField);
-            
-            Destiny destiny = new Destiny(battleField);            
-            Boss boss = new Boss(SystemFunction.RandNum(3, 18), SystemFunction.RandNum(3, 18), battleField);
-            Weapon arma = new Weapon(SystemFunction.RandNum(3, 18), SystemFunction.RandNum(3, 18), battleField);
-            Poison[] poisons = new Poison[8];            
-            for (int i = 0; i <= 7; i++)
-            {
-                Poison poison = new Poison(SystemFunction.RandNum(3, 18), SystemFunction.RandNum(3, 18), battleField);
-                poisons[i] = poison;
-            }
+            Hero hero = new Hero();
+            battleField.SetValue(hero, hero.x, hero.y);
+
+            Weapon weapon = new Weapon(SystemFunction.RandNum(3, 18), SystemFunction.RandNum(3, 18));
+            battleField.SetValue(weapon, weapon.x, weapon.y);
+
+            Destiny destiny = new Destiny();
+            battleField.SetValue(destiny, destiny.x, destiny.y);
+
+            Boss boss = new Boss(SystemFunction.RandNum(3,18), SystemFunction.RandNum(3, 18));
+            battleField.SetValue(boss, boss.x, boss.y);
+
             Monster[] monsters = new Monster[6];
             for (int i = 0; i <= 5; i++)
             {
-                Monster monstro = new Monster(SystemFunction.RandNum(3, 18), SystemFunction.RandNum(3, 18), battleField);
-                monsters[i] = monstro;
+                monsters[i] = new Monster(SystemFunction.RandNum(3, 18), SystemFunction.RandNum(3, 18));
+                battleField.SetValue(monsters[i], monsters[i].x, monsters[i].y);
             }
-            
-            
-            
+
+            Poison[] poisons = new Poison[8];
+            for (int i = 0; i <= 7; i++)
+            {
+                poisons[i] = new Poison(SystemFunction.RandNum(3, 18), SystemFunction.RandNum(3, 18));
+                battleField.SetValue(poisons[i], poisons[i].x, poisons[i].y);
+            }
+
             while (FLAG)
             {
                 Console.Clear();                
-                SystemFunction.PrintStatusBar(ref hero.hp, ref hero.damage, ref hero.points);
+                SystemFunction.PrintStatusBar(hero.hp, hero.damage, hero.points);
                 SystemFunction.PrintGrid(battleField);
-                Console.WriteLine("A posição do boss: " + boss.hp);
                 Console.Write("A Posição do hero: " + hero.Position);
-                ConsoleKey key = Console.ReadKey().Key;
-
+                ConsoleKey key = Console.ReadKey().Key;            
+                
                 hero.Control(key, ref battleField);//Ação do jogador
-                //Monstros em direção Aletória
-                
-                foreach(Monster monster in monsters)
-                {
-                    monster.Move(key,ref battleField);
-                }
+                //Monstros se movem em posição Aletória 
                 boss.Move(key, ref battleField);
-                
+                foreach (Monster monster in monsters)
+                {
+                    monster.Move(key, ref battleField);
+                }
+
             }
             
 

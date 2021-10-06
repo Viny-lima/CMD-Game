@@ -5,23 +5,17 @@ using System;
 namespace CMD_Game.GridObjects
 {
     public class Hero : ObjectGrid
-    {       
-                    
-        public Hero (ObjectGrid[,] grid) : base(1, 1, GridType.H, 100, 1, 0) 
-        {
-            //SetValue()
-            grid[x, y]._type = this._type;
-            grid[x, y].damage = this.damage;
-            grid[x, y].hp = this.hp;
-            grid[x, y].points = this.points;
-        }
+    {
+
+        public Hero() : base(1, 1, GridType.H, 25, 1, 0) { }
+        
 
         public void Control(ConsoleKey key, ref ObjectGrid[,] grid)
         {
             //O Herói perde vida quando se move
             ObjectGrid right = grid[x, y + 1];
             ObjectGrid left = grid[x, y - 1];
-            ObjectGrid donw = grid[x + 1, y];
+            ObjectGrid down = grid[x + 1, y];
             ObjectGrid top = grid[x - 1, y];
 
             switch (key)
@@ -29,16 +23,14 @@ namespace CMD_Game.GridObjects
                 case ConsoleKey.D:
                     if (right._type == GridType.O)
                     {
-
-                        grid[x, y]._type = GridType.O;
-                        y++;
-
+                        //[D] to move right                    
+                        grid.SetValue(new ObjectGrid(x, y, GridType.O), x, y);
+                        y ++;
                         if (y > 20)
                         {
-
+                            //Ele não pode ultrapassar o tamanho do Grid;
                             y = 20;
-
-                        } 
+                        }
                         else
                         {
                             if (hp > 0)
@@ -47,18 +39,38 @@ namespace CMD_Game.GridObjects
                             }
 
                         }
+                        grid.SetValue(this, x, y);
+                    }
 
-                        grid[x, y]._type = _type;
-                    }                    
+                    if(right._type == GridType.W)
+                    {
+                        //[D] to move right                    
+                        grid.SetValue(new ObjectGrid(x, y, GridType.O), x, y);
+                        y++;
+                        if (y > 20)
+                        {
+                            //Ele não pode ultrapassar o tamanho do Grid;
+                            y = 20;
+                        }
+                        else
+                        {
+                            if (hp > 0)
+                            {
+                                hp--;
+                            }
+
+                        }
+                        grid.SetValue(this, x, y);
+                        this.damage += right.damage;
+                    }
                     break;
 
                 case ConsoleKey.A:
                     if (left._type == GridType.O)
                     {
-                        //[A] to move right                    
-                        grid[x, y]._type = GridType.O;
-                        y -= 1;
-
+                        //[A] to move left                    
+                        grid.SetValue(new ObjectGrid(x, y, GridType.O), x, y);
+                        y --;
                         if (y < 1)
                         {
                             //Ele não pode ultrapassar o tamanho do Grid;
@@ -72,16 +84,37 @@ namespace CMD_Game.GridObjects
                             }
 
                         }
-                        grid[x, y]._type = _type;
-                        Console.WriteLine("> to move left");
-                    }                    
+                        grid.SetValue(this, x, y);
+                    }
+
+                    if (left._type == GridType.W)
+                    {
+                        //[A] to move left                    
+                        grid.SetValue(new ObjectGrid(x, y, GridType.O), x, y);
+                        y--;
+                        if (y < 1)
+                        {
+                            //Ele não pode ultrapassar o tamanho do Grid;
+                            y = 1;
+                        }
+                        else
+                        {
+                            if (hp > 0)
+                            {
+                                hp--;
+                            }
+
+                        }
+                        grid.SetValue(this, x, y);
+                        this.damage += left.damage;
+                    }
                     break;
 
                 case ConsoleKey.S:
-                    if (donw._type == GridType.O)
+                    if (down._type == GridType.O)
                     {
                         //[S] to move down                    
-                        grid[x, y]._type = GridType.O;
+                        grid.SetValue(new ObjectGrid(x, y, GridType.O), x, y);
                         x += 1;
 
                         if (x > 20)
@@ -97,8 +130,30 @@ namespace CMD_Game.GridObjects
                             }
 
                         }
-                        grid[x, y]._type = _type;
-                        Console.WriteLine("> to move down");
+                        grid.SetValue(this, x, y);
+                    }
+
+                    if (down._type == GridType.W)
+                    {
+                        //[S] to move down                    
+                        grid.SetValue(new ObjectGrid(x, y, GridType.O), x, y);
+                        x += 1;
+
+                        if (x > 20)
+                        {
+                            //Ele não pode ultrapassar o tamanho do Grid;
+                            x = 20;
+                        }
+                        else
+                        {
+                            if (hp > 0)
+                            {
+                                hp--;
+                            }
+
+                        }
+                        grid.SetValue(this, x, y);
+                        this.damage += down.damage;
                     }
                     break;
 
@@ -106,7 +161,7 @@ namespace CMD_Game.GridObjects
                     if (top._type == GridType.O)
                     {
                         //[W] to move up                 
-                        grid[x, y]._type = GridType.O;
+                        grid.SetValue(new ObjectGrid(x, y, GridType.O), x, y);
                         x -= 1;
 
                         if (x < 1)
@@ -121,10 +176,30 @@ namespace CMD_Game.GridObjects
                                 hp--;
                             }
                         }
-                        grid[x, y]._type = _type;
-                        Console.WriteLine("> to move up");
-                    }                 
+                        grid.SetValue(this, x, y);
+                    }  
+                    
+                    if (top._type == GridType.W)
+                    {
+                        //[W] to move up                 
+                        grid.SetValue(new ObjectGrid(x, y, GridType.O), x, y);
+                        x -= 1;
 
+                        if (x < 1)
+                        {
+                            //Ele não pode ultrapassar o tamanho do Grid;
+                            x = 1;
+                        }
+                        else
+                        {
+                            if (hp > 0)
+                            {
+                                hp--;
+                            }
+                        }
+                        grid.SetValue(this, x, y);
+                        this.damage += top.damage;
+                    }
                     break;
 
                 case ConsoleKey.Escape:
@@ -136,19 +211,19 @@ namespace CMD_Game.GridObjects
 
                     if (top._type == GridType.M || top._type == GridType.B)
                     {                        
-                        SystemFunction.Battle(top, this, grid);
+                        SystemFunction.Battle((Monster) top, this, grid);
                     }
-                    if (donw._type == GridType.M || donw._type == GridType.B)
+                    if (down._type == GridType.M || down._type == GridType.B)
                     {
-                        SystemFunction.Battle(donw, this, grid);
+                        SystemFunction.Battle((Monster)down, this, grid);
                     }
                     if (left._type == GridType.M || left._type == GridType.B)
                     {
-                        SystemFunction.Battle(left, this, grid);
+                        SystemFunction.Battle((Monster) left, this, grid);
                     }
                     if (right._type == GridType.M || right._type == GridType.B)
                     {
-                        SystemFunction.Battle(right, this, grid);
+                        SystemFunction.Battle((Monster)right, this, grid);
                     }
                     break;
 
@@ -156,10 +231,7 @@ namespace CMD_Game.GridObjects
             }
         }
 
-        public virtual void React()
-        {
 
-        }
 
     }   
 }

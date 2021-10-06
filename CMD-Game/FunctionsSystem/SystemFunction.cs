@@ -83,12 +83,16 @@ namespace CMD_Game.FunctionsSystem
         }
 
 
-        public static void PrintStatusBar(ref int heroHp, ref int heroDamage, ref int heroScore)
-        {
+        public static void PrintStatusBar(int heroHp, int heroDamage, int heroScore)
+        {            
             //Depois usar ref para variáveis  (ref Player.HeroHp)
             CriarLinha(40);
             Console.WriteLine($"Hero HP:{heroHp} Hero Damage:{heroDamage} Hero Score:{heroScore}".PadLeft(39));
             CriarLinha(40);
+            if (heroHp <= 0)
+            {
+                Program.FLAG = false;
+            }
         }
 
 
@@ -128,26 +132,26 @@ namespace CMD_Game.FunctionsSystem
 
         
         
-        public static void Battle(ObjectGrid  monster , Hero hero, ObjectGrid[,] grid)
+        public static void Battle(Monster monster , Hero hero, ObjectGrid[,] grid)
         {
-            if (monster.hp <= 1)
+            if (monster.hp > 0)
             {
-                monster._type = GridType.O;
-                hero.points += monster.points;
+                monster.hp -= hero.damage;
             } 
             else
             {
-                monster.hp -= hero.damage;
+                hero.points += monster.points;
+                grid.SetValue(new ObjectGrid(monster.x, monster.y, GridType.O), monster.x, monster.y);                
             }
 
-            if (hero.hp <= 1)
-            {
-                //Se a vida do herói zerar o programa deve fechar
-                Program.FLAG = false;
+            if (hero.hp > 1)
+            {                
+                hero.hp -= monster.damage;                
             }
             else
             {
-                hero.hp -= monster.damage;
+                //Se a vida do herói zerar o programa deve fechar
+                Program.FLAG = false;
             }            
         }
 

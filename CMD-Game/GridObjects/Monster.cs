@@ -6,18 +6,7 @@ namespace CMD_Game.GridObjects
 {
     public class Monster : ObjectGrid
     {
-        public Monster(int x, int y, ObjectGrid[,] grid,GridType type = GridType.M, int hp = 5, int damage = 1, int points = 10) : base (x, y, type, hp, damage, points) 
-        {
-            if(grid[base.x, base.y]._type == GridType.O)
-            {
-                //SetValue()
-                grid[base.x, base.y]._type = this._type;
-                grid[base.x, base.y].hp = this.hp;
-                grid[base.x, base.y].damage = this.damage;
-                grid[base.x, base.y].points = this.points;
-            }
-            
-        }
+        public Monster(int x, int y,GridType type = GridType.M, int hp = 5, int damage = 1, int points = 10) : base (x, y, type, hp, damage, points) { }        
 
         public void Move(ConsoleKey key, ref ObjectGrid[,] grid)
         {
@@ -29,14 +18,13 @@ namespace CMD_Game.GridObjects
             if (key == ConsoleKey.A || key == ConsoleKey.D || key == ConsoleKey.W || key == ConsoleKey.S || key == ConsoleKey.Spacebar)
             {
 
-                switch (SystemFunction.RandNum(1,4))
+                switch (SystemFunction.RandNum(1,5))
                 {
                     case 1:
 
                         if (right._type == GridType.O)
                         {
-
-                            grid[x, y]._type = GridType.O;
+                            grid.SetValue(new ObjectGrid(x, y, GridType.O), x, y);
                             y ++;
 
                             if (y > 20)
@@ -46,7 +34,7 @@ namespace CMD_Game.GridObjects
 
                             }
 
-                            grid[x, y]._type = _type;
+                            grid.SetValue(this, x, y);
                         }
 
                         break;
@@ -55,7 +43,7 @@ namespace CMD_Game.GridObjects
                         if (left._type == GridType.O)
                         {
                             //[A] to move right                    
-                            grid[x, y]._type = GridType.O;
+                            grid.SetValue(new ObjectGrid(x, y, GridType.O), x, y);
                             y --;
 
                             if (y < 1)
@@ -63,7 +51,8 @@ namespace CMD_Game.GridObjects
                                 //Ele não pode ultrapassar o tamanho do Grid;
                                 y = 1;
                             }
-                            grid[x, y]._type = _type;
+
+                            grid.SetValue(this, x, y);
                         }
 
                         break;
@@ -72,7 +61,7 @@ namespace CMD_Game.GridObjects
                         if (donw._type == GridType.O)
                         {
                             //[S] to move down                    
-                            grid[x, y]._type = GridType.O;
+                            grid.SetValue(new ObjectGrid(x, y, GridType.O), x, y);
                             x ++;
 
                             if (x > 20)
@@ -80,7 +69,8 @@ namespace CMD_Game.GridObjects
                                 //Ele não pode ultrapassar o tamanho do Grid;
                                 x = 20;
                             }
-                            grid[x, y]._type = _type;
+
+                            grid.SetValue(this, x, y);
                         }
                         break;
 
@@ -88,7 +78,7 @@ namespace CMD_Game.GridObjects
                         if (top._type == GridType.O)
                         {
                             //[W] to move up                 
-                            grid[x, y]._type = GridType.O;
+                            grid.SetValue(new ObjectGrid(x, y, GridType.O), x, y);
                             x --;
 
                             if (x < 1)
@@ -96,25 +86,26 @@ namespace CMD_Game.GridObjects
                                 //Ele não pode ultrapassar o tamanho do Grid;
                                 x = 1;
                             }
-                            grid[x, y]._type = _type;
+
+                            grid.SetValue(this, x, y);
                         }
                         break;
                 }
 
                 //Mostros batem em Hero
-                if (right._type == GridType.H)
+                if (right._type == GridType.H && right.hp > 2)
                 {
                     right.hp -= this.damage;
                 }
-                if (left._type == GridType.H)
+                if (left._type == GridType.H && right.hp > 2)
                 {
                     left.hp -= this.damage;
                 }
-                if (donw._type == GridType.H)
+                if (donw._type == GridType.H && right.hp > 2)
                 {
                     donw.hp -= this.damage;
                 }
-                if (top._type == GridType.H)
+                if (top._type == GridType.H && right.hp > 2)
                 {
                     top.hp -= this.damage;
                 }
