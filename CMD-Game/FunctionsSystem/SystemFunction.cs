@@ -7,6 +7,8 @@ namespace CMD_Game.FunctionsSystem
 {
     public static class SystemFunction
     {
+        public static object Graphics { get; private set; }
+
         public static void CriarLinha(int Tamanho)
         {            
             for (int i = 0; i <= Tamanho; i++)
@@ -153,6 +155,17 @@ namespace CMD_Game.FunctionsSystem
                 //Se a vida do herói zerar o programa deve fechar
                 Program.FLAG = false;
             }            
+        }
+
+        public static void PrintScore(Hero hero)
+        {
+            Console.Clear();
+            Console.BackgroundColor = ConsoleColor.Yellow;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.WriteLine("==========================================================");
+            Console.WriteLine($"=        VOCÊ VENCEU ! SCORE{hero.points + hero.hp}      =");
+            Console.WriteLine("==========================================================");
+            Console.ResetColor();
         }
 
     }
