@@ -134,7 +134,7 @@ namespace CMD_Game.FunctionsSystem
         
         public static void Battle(Monster monster , Hero hero, ObjectGrid[,] grid)
         {
-            if (monster.hp > 0)
+            if (monster.hp > 1)
             {
                 monster.hp -= hero.damage;
             } 
