@@ -86,7 +86,30 @@ namespace CMD_Game.GridObjects
                         this.points += right.points;
 
                     }
-                    break;
+                    if (right._type == GridType.D)
+                    {
+                        //[D] to move right                    
+                        grid.SetValue(new ObjectGrid(x, y, GridType.O), x, y);
+                        y++;
+                        if (y > 20)
+                        {
+                            //Ele não pode ultrapassar o tamanho do Grid;
+                            y = 20;
+                        }
+                        else
+                        {
+                            if (hp > 0)
+                            {
+                                hp--;
+                            }
+
+                        }
+                        grid.SetValue(this, x, y);
+                        Console.Clear();
+                        Program.FLAG = false;
+                        Console.WriteLine("venceu");
+                    }
+                        break;
 
                 case ConsoleKey.A:
                     if (left._type == GridType.O)
@@ -225,6 +248,32 @@ namespace CMD_Game.GridObjects
                         grid.SetValue(this, x, y);
                         this.hp += down.hp;
                         this.points += down.points;
+                    }
+                    if (down._type == GridType.D)
+                    {
+                        //[S] to move down                    
+                        grid.SetValue(new ObjectGrid(x, y, GridType.O), x, y);
+                        x += 1;
+
+                        if (x > 20)
+                        {
+                            //Ele não pode ultrapassar o tamanho do Grid;
+                            x = 20;
+                        }
+                        else
+                        {
+                            if (hp > 0)
+                            {
+                                hp--;
+                            }
+
+                        }
+                        grid.SetValue(this, x, y);
+                        Console.Clear();
+                        Program.FLAG = false;
+                        Console.WriteLine("venceu");
+
+
                     }
 
                         break;
