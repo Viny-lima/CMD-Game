@@ -90,12 +90,7 @@ namespace CMD_Game.FunctionsSystem
             //Depois usar ref para variáveis  (ref Player.HeroHp)
             CriarLinha(40);
             Console.WriteLine($"Hero HP:{hero.hp} Hero Damage:{hero.damage} Hero Score:{hero.hp + hero.points}".PadLeft(39));
-            CriarLinha(40);
-            if (hero.hp <= 0)
-            {
-                Program.FLAG = false;
-                PrintScore(hero, false);
-            }
+            CriarLinha(40);            
         }
 
 
@@ -152,29 +147,22 @@ namespace CMD_Game.FunctionsSystem
             }           
         }
 
-        public static void PrintScore(Hero hero,bool victory)
-        {
-          if (victory)
-          {
+        public static void PrintScore(Hero hero)
+        {          
                 Console.Clear();
                 Console.BackgroundColor = ConsoleColor.White;
                 Console.ForegroundColor = ConsoleColor.Black;
-                Console.WriteLine($">>>       VOCÊ VENCEU ! SCORE: {hero.points + hero.hp}      <<<");
-                Console.ResetColor();
-          }
-          else
-          {
-                Console.Clear();
-                Console.BackgroundColor = ConsoleColor.DarkRed;
-                Console.ForegroundColor = ConsoleColor.Black;
-                Console.WriteLine($">>>       VOCÊ PERDEU ! SCORE: {hero.points + hero.hp}      <<<");
-                Console.ResetColor();
-
-            }
+                Console.WriteLine($">>>      SCORE: {hero.points + hero.hp}      <<<");
+                Console.ResetColor();          
         }
 
         public static void PrintStatusHero(Hero hero)
         {
+            if (hero.hp <= 0)
+            {
+                hero.status = Hero.StatusHero.GameOver;    
+            }
+
             switch (hero.status)
             {
                 case Hero.StatusHero.none:                    
@@ -201,7 +189,14 @@ namespace CMD_Game.FunctionsSystem
                     Console.WriteLine(" To get weapon");
                     break;
                 case Hero.StatusHero.victory:
-                    Console.WriteLine($" To victory ! {hero.hp + hero.points}");
+                    Console.WriteLine($" Victory !");
+                    PrintScore(hero);
+                    Program.FLAG = false; //ENCERRAR O GAME
+                    break;
+                case Hero.StatusHero.GameOver:
+                    Console.WriteLine("Game Over !");
+                    PrintScore(hero);
+                    Program.FLAG = false; //ENCERRAR O GAME
                     break;
             }
         }
