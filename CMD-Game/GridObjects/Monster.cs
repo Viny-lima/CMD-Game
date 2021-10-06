@@ -22,7 +22,7 @@ namespace CMD_Game.GridObjects
                 {
                     case 1:
 
-                        if (right._type == GridType.O)
+                        if (right._type == GridType.O && this.hp > 1)
                         {
                             grid.SetValue(new ObjectGrid(x, y, GridType.O), x, y);
                             y ++;
@@ -40,7 +40,7 @@ namespace CMD_Game.GridObjects
                         break;
 
                     case 2:
-                        if (left._type == GridType.O)
+                        if (left._type == GridType.O && this.hp > 1)
                         {
                             //[A] to move right                    
                             grid.SetValue(new ObjectGrid(x, y, GridType.O), x, y);
@@ -58,7 +58,7 @@ namespace CMD_Game.GridObjects
                         break;
 
                     case 3:
-                        if (donw._type == GridType.O)
+                        if (donw._type == GridType.O && this.hp > 1)
                         {
                             //[S] to move down                    
                             grid.SetValue(new ObjectGrid(x, y, GridType.O), x, y);
@@ -75,7 +75,7 @@ namespace CMD_Game.GridObjects
                         break;
 
                     case 4:
-                        if (top._type == GridType.O)
+                        if (top._type == GridType.O && this.hp > 1)
                         {
                             //[W] to move up                 
                             grid.SetValue(new ObjectGrid(x, y, GridType.O), x, y);

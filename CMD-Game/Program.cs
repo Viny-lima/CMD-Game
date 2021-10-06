@@ -2,7 +2,6 @@
 using CMD_Game.GridObjects;
 using CMD_Game.Tipos;
 using System;
-using static CMD_Game.Tipos.ObjectGrid;
 
 namespace CMD_Game
 {
