@@ -40,12 +40,12 @@ namespace CMD_Game
                 battleField.SetValue(poisons[i], poisons[i].x, poisons[i].y);
             }
 
-            while (FLAG)
+            do
             {                
                 SystemFunction.PrintStatusBar(hero);
                 SystemFunction.PrintGrid(battleField);
                 SystemFunction.PrintStatusHero(hero);
-                ConsoleKey key = Console.ReadKey().Key;                            
+                ConsoleKey key = Console.ReadKey().Key;
                 hero.Control(key, ref battleField);//Ação do jogador
 
                 //Monstros se movem em posição Aletória 
@@ -54,8 +54,11 @@ namespace CMD_Game
                 {
                     monster.Move(key, ref battleField);
                 }
+                Console.Clear();
             }
-            
+            while (FLAG);
+
+
 
         }
 

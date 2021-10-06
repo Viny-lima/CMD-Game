@@ -16,13 +16,101 @@ namespace CMD_Game.GridObjects
             attackMoster,            
             getPosion,
             getWeapon,
-            victory
+            victory,
+            GameOver
         }
 
         public StatusHero status = StatusHero.none;
 
         public Hero() : base(1, 1, GridType.H, 25, 1, 0) { }
         
+
+        void ToRight(ObjectGrid[,] grid)
+        {
+            //[D] to move right                    
+            grid.SetValue(new ObjectGrid(x, y, GridType.O), x, y);
+            y++;
+            if (y > 20)
+            {
+                //Ele não pode ultrapassar o tamanho do Grid;
+                y = 20;
+            }
+            else
+            {
+                if (hp > 0)
+                {
+                    hp--;
+                }
+
+            }
+            grid.SetValue(this, x, y);
+            status = StatusHero.right;
+        }
+
+        void Toleft(ObjectGrid [,] grid)
+        {
+            //[A] to move left                    
+            grid.SetValue(new ObjectGrid(x, y, GridType.O), x, y);
+            y--;
+            if (y < 1)
+            {
+                //Ele não pode ultrapassar o tamanho do Grid;
+                y = 1;
+            }
+            else
+            {
+                if (hp > 0)
+                {
+                    hp--;
+                }
+
+            }
+            grid.SetValue(this, x, y);
+        }
+
+        void ToDown(ObjectGrid[,] grid)
+        {
+            //[S] to move down                    
+            grid.SetValue(new ObjectGrid(x, y, GridType.O), x, y);
+            x += 1;
+
+            if (x > 20)
+            {
+                //Ele não pode ultrapassar o tamanho do Grid;
+                x = 20;
+            }
+            else
+            {
+                if (hp > 0)
+                {
+                    hp--;
+                }
+
+            }
+            grid.SetValue(this, x, y);
+        }
+
+        void ToUp(ObjectGrid[,] grid)
+        {
+            //[W] to move up                 
+            grid.SetValue(new ObjectGrid(x, y, GridType.O), x, y);
+            x -= 1;
+
+            if (x < 1)
+            {
+                //Ele não pode ultrapassar o tamanho do Grid;
+                x = 1;
+            }
+            else
+            {
+                if (hp > 0)
+                {
+                    hp--;
+                }
+            }
+            grid.SetValue(this, x, y);
+        }
+
 
         public void Control(ConsoleKey key, ref ObjectGrid[,] grid)
         {
@@ -37,345 +125,100 @@ namespace CMD_Game.GridObjects
                 case ConsoleKey.D:
                     if (right._type == GridType.O)
                     {
-                        //[D] to move right                    
-                        grid.SetValue(new ObjectGrid(x, y, GridType.O), x, y);
-                        y ++;
-                        if (y > 20)
-                        {
-                            //Ele não pode ultrapassar o tamanho do Grid;
-                            y = 20;
-                        }
-                        else
-                        {
-                            if (hp > 0)
-                            {
-                                hp--;
-                            }
-
-                        }
-                        grid.SetValue(this, x, y);
+                        ToRight(grid);
                         status = StatusHero.right;
-                        Console.Clear();                        
                     }
 
                     if(right._type == GridType.W)
                     {
-                        //[D] to move right                    
-                        grid.SetValue(new ObjectGrid(x, y, GridType.O), x, y);
-                        y++;
-                        if (y > 20)
-                        {
-                            //Ele não pode ultrapassar o tamanho do Grid;
-                            y = 20;
-                        }
-                        else
-                        {
-                            if (hp > 0)
-                            {
-                                hp--;
-                            }
-
-                        }
-                        grid.SetValue(this, x, y);
-                        this.damage += right.damage;
+                        ToRight(grid);
                         status = StatusHero.getWeapon;
-                        Console.Clear();
+                        this.damage += right.damage;                        
                     }
                     if (right._type == GridType.P)
                     {
-                        //[D] to move right                    
-                        grid.SetValue(new ObjectGrid(x, y, GridType.O), x, y);
-                        y++;
-                        if (y > 20)
-                        {
-                            //Ele não pode ultrapassar o tamanho do Grid;
-                            y = 20;
-                        }
-                        else
-                        {
-                            if (hp > 0)
-                            {
-                                hp--;
-                            }
-
-                        }
-                        grid.SetValue(this, x, y);
-                        this.hp += right.hp;
-                        this.points += right.points;
+                        ToRight(grid);
                         status = StatusHero.getPosion;
-                        Console.Clear();
-
+                        this.hp += right.hp;
+                        this.points += right.points;                                                                   
                     }
                     if (right._type == GridType.D)
                     {
-                        //[D] to move right                    
-                        grid.SetValue(new ObjectGrid(x, y, GridType.O), x, y);
-                        y++;
-                        if (y > 20)
-                        {
-                            //Ele não pode ultrapassar o tamanho do Grid;
-                            y = 20;
-                        }
-                        else
-                        {
-                            if (hp > 0)
-                            {
-                                hp--;
-                            }
-
-                        }
-                        grid.SetValue(this, x, y);
-                       
-                        Program.FLAG = false;
-                        status = StatusHero.victory;
-                        SystemFunction.PrintScore(this,true);
+                        ToRight(grid);
+                        status = StatusHero.GameOver;
+                        SystemFunction.PrintScore(this);
                     }                    
                     break;
 
                 case ConsoleKey.A:
                     if (left._type == GridType.O)
                     {
-                        //[A] to move left                    
-                        grid.SetValue(new ObjectGrid(x, y, GridType.O), x, y);
-                        y --;
-                        if (y < 1)
-                        {
-                            //Ele não pode ultrapassar o tamanho do Grid;
-                            y = 1;
-                        }
-                        else
-                        {
-                            if (hp > 0)
-                            {
-                                hp--;
-                            }
-
-                        }
-                        grid.SetValue(this, x, y);
+                        Toleft(grid);
                         status = StatusHero.left;
                         Console.Clear();
                     }
 
                     if (left._type == GridType.W)
                     {
-                        //[A] to move left                    
-                        grid.SetValue(new ObjectGrid(x, y, GridType.O), x, y);
-                        y--;
-                        if (y < 1)
-                        {
-                            //Ele não pode ultrapassar o tamanho do Grid;
-                            y = 1;
-                        }
-                        else
-                        {
-                            if (hp > 0)
-                            {
-                                hp--;
-                            }
-
-                        }
-                        grid.SetValue(this, x, y);
+                        Toleft(grid);
                         this.damage += left.damage;
-                        status = StatusHero.getWeapon;
-                        Console.Clear();
+                        status = StatusHero.getWeapon;;
                     }
                     if (left._type == GridType.P)
                     {
-                        //[A] to move left                    
-                        grid.SetValue(new ObjectGrid(x, y, GridType.O), x, y);
-                        y--;
-                        if (y < 1)
-                        {
-                            //Ele não pode ultrapassar o tamanho do Grid;
-                            y = 1;
-                        }
-                        else
-                        {
-                            if (hp > 0)
-                            {
-                                hp--;
-                            }
-
-                        }
-                        grid.SetValue(this, x, y);
+                        Toleft(grid);
                         this.hp += left.hp;
                         this.points += left.points;
                         status = StatusHero.getPosion;
-                        Console.Clear();
                     }
                     break;
 
                 case ConsoleKey.S:
                     if (down._type == GridType.O)
                     {
-                        //[S] to move down                    
-                        grid.SetValue(new ObjectGrid(x, y, GridType.O), x, y);
-                        x += 1;
-
-                        if (x > 20)
-                        {
-                            //Ele não pode ultrapassar o tamanho do Grid;
-                            x = 20;
-                        }
-                        else
-                        {
-                            if (hp > 0)
-                            {
-                                hp--;
-                            }
-
-                        }
-                        grid.SetValue(this, x, y);
+                        ToDown(grid);
                         status = StatusHero.down;
-                        Console.Clear();
                     }
 
                     if (down._type == GridType.W)
                     {
-                        //[S] to move down                    
-                        grid.SetValue(new ObjectGrid(x, y, GridType.O), x, y);
-                        x += 1;
-
-                        if (x > 20)
-                        {
-                            //Ele não pode ultrapassar o tamanho do Grid;
-                            x = 20;
-                        }
-                        else
-                        {
-                            if (hp > 0)
-                            {
-                                hp--;
-                            }
-
-                        }
-                        grid.SetValue(this, x, y);
+                        ToDown(grid);
                         this.damage += down.damage;
                         status = StatusHero.getWeapon;
-                        Console.Clear();
                     }
                     if (down._type == GridType.P)
                     {
-                        //[S] to move down                    
-                        grid.SetValue(new ObjectGrid(x, y, GridType.O), x, y);
-                        x += 1;
-
-                        if (x > 20)
-                        {
-                            //Ele não pode ultrapassar o tamanho do Grid;
-                            x = 20;
-                        }
-                        else
-                        {
-                            if (hp > 0)
-                            {
-                                hp--;
-                            }
-
-                        }
-                        grid.SetValue(this, x, y);
+                        ToDown(grid);
                         this.hp += down.hp;
                         this.points += down.points;
                         status = StatusHero.getPosion;
-                        Console.Clear();
                     }
                     if (down._type == GridType.D)
                     {
-                        //[S] to move down                    
-                        grid.SetValue(new ObjectGrid(x, y, GridType.O), x, y);
-                        x += 1;
-
-                        if (x > 20)
-                        {
-                            //Ele não pode ultrapassar o tamanho do Grid;
-                            x = 20;
-                        }
-                        else
-                        {
-                            if (hp > 0)
-                            {
-                                hp--;
-                            }
-
-                        }
-                        grid.SetValue(this, x, y);
-                       
-                        Program.FLAG = false;
+                        ToDown(grid);
                         status = StatusHero.victory;
-                        SystemFunction.PrintScore(this,true);
                     }
                     break;
 
                 case ConsoleKey.W:
                     if (top._type == GridType.O)
                     {
-                        //[W] to move up                 
-                        grid.SetValue(new ObjectGrid(x, y, GridType.O), x, y);
-                        x -= 1;
-
-                        if (x < 1)
-                        {
-                            //Ele não pode ultrapassar o tamanho do Grid;
-                            x = 1;
-                        }
-                        else
-                        {
-                            if (hp > 0)
-                            {
-                                hp--;
-                            }
-                        }
-                        grid.SetValue(this, x, y);
+                        ToUp(grid);
                         status = StatusHero.top;
-                        Console.Clear();
                     }  
                     
                     if (top._type == GridType.W)
                     {
-                        //[W] to move up                 
-                        grid.SetValue(new ObjectGrid(x, y, GridType.O), x, y);
-                        x -= 1;
-
-                        if (x < 1)
-                        {
-                            //Ele não pode ultrapassar o tamanho do Grid;
-                            x = 1;
-                        }
-                        else
-                        {
-                            if (hp > 0)
-                            {
-                                hp--;
-                            }
-                        }
-                        grid.SetValue(this, x, y);
+                        ToUp(grid);
                         this.damage += top.damage;
                         status = StatusHero.getWeapon;
-                        Console.Clear();
                     }
                     if (top._type == GridType.P)
                     {
-                        //[W] to move up                 
-                        grid.SetValue(new ObjectGrid(x, y, GridType.O), x, y);
-                        x -= 1;
-
-                        if (x < 1)
-                        {
-                            //Ele não pode ultrapassar o tamanho do Grid;
-                            x = 1;
-                        }
-                        else
-                        {
-                            if (hp > 0)
-                            {
-                                hp--;
-                            }
-                        }
-                        grid.SetValue(this, x, y);
+                        ToUp(grid);
                         this.hp += top.hp;
                         this.points += top.points;
                         status = StatusHero.getPosion;
-                        Console.Clear();
                     }
                     break;
 
