@@ -6,7 +6,7 @@ namespace CMD_Game.GridObjects
 {
     public class Monster : ObjectGrid
     {
-        public Monster(int x, int y,GridType type = GridType.M, int hp = 5, int damage = 1, int points = 10) : base (x, y, type, hp, damage, points) { }        
+        public Monster(int x, int y,GridType type = GridType.M, int hp = 5, int damage = 1, int points = 5) : base (x, y, type, hp, damage, points) { }        
 
         public void Move(ConsoleKey key, ref ObjectGrid[,] grid)
         {

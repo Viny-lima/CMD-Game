@@ -63,6 +63,29 @@ namespace CMD_Game.GridObjects
                         grid.SetValue(this, x, y);
                         this.damage += right.damage;
                     }
+                    if (right._type == GridType.P)
+                    {
+                        //[D] to move right                    
+                        grid.SetValue(new ObjectGrid(x, y, GridType.O), x, y);
+                        y++;
+                        if (y > 20)
+                        {
+                            //Ele não pode ultrapassar o tamanho do Grid;
+                            y = 20;
+                        }
+                        else
+                        {
+                            if (hp > 0)
+                            {
+                                hp--;
+                            }
+
+                        }
+                        grid.SetValue(this, x, y);
+                        this.hp += right.hp;
+                        this.points += right.points;
+
+                    }
                     break;
 
                 case ConsoleKey.A:
@@ -108,7 +131,32 @@ namespace CMD_Game.GridObjects
                         grid.SetValue(this, x, y);
                         this.damage += left.damage;
                     }
-                    break;
+                    if (left._type == GridType.P)
+                    {
+                        //[A] to move left                    
+                        grid.SetValue(new ObjectGrid(x, y, GridType.O), x, y);
+                        y--;
+                        if (y < 1)
+                        {
+                            //Ele não pode ultrapassar o tamanho do Grid;
+                            y = 1;
+                        }
+                        else
+                        {
+                            if (hp > 0)
+                            {
+                                hp--;
+                            }
+
+                        }
+                        grid.SetValue(this, x, y);
+                        this.hp += left.hp;
+                        this.points += left.points;
+
+                    }
+
+
+                        break;
 
                 case ConsoleKey.S:
                     if (down._type == GridType.O)
@@ -155,7 +203,31 @@ namespace CMD_Game.GridObjects
                         grid.SetValue(this, x, y);
                         this.damage += down.damage;
                     }
-                    break;
+                    if (down._type == GridType.P)
+                    {
+                        //[S] to move down                    
+                        grid.SetValue(new ObjectGrid(x, y, GridType.O), x, y);
+                        x += 1;
+
+                        if (x > 20)
+                        {
+                            //Ele não pode ultrapassar o tamanho do Grid;
+                            x = 20;
+                        }
+                        else
+                        {
+                            if (hp > 0)
+                            {
+                                hp--;
+                            }
+
+                        }
+                        grid.SetValue(this, x, y);
+                        this.hp += down.hp;
+                        this.points += down.points;
+                    }
+
+                        break;
 
                 case ConsoleKey.W:
                     if (top._type == GridType.O)
@@ -200,7 +272,30 @@ namespace CMD_Game.GridObjects
                         grid.SetValue(this, x, y);
                         this.damage += top.damage;
                     }
-                    break;
+                    if (top._type == GridType.P)
+                    {
+                        //[W] to move up                 
+                        grid.SetValue(new ObjectGrid(x, y, GridType.O), x, y);
+                        x -= 1;
+
+                        if (x < 1)
+                        {
+                            //Ele não pode ultrapassar o tamanho do Grid;
+                            x = 1;
+                        }
+                        else
+                        {
+                            if (hp > 0)
+                            {
+                                hp--;
+                            }
+                        }
+                        grid.SetValue(this, x, y);
+                        this.hp += top.hp;
+                        this.points += top.points;
+
+                    }
+                        break;
 
                 case ConsoleKey.Escape:
                     Program.FLAG = false;
