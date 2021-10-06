@@ -146,7 +146,6 @@ namespace CMD_Game.GridObjects
                     {
                         ToRight(grid);
                         status = StatusHero.GameOver;
-                        SystemFunction.PrintScore(this);
                     }                    
                     break;
 

@@ -40,8 +40,9 @@ namespace CMD_Game
                 battleField.SetValue(poisons[i], poisons[i].x, poisons[i].y);
             }
 
-            do
-            {                
+            while(FLAG)
+            {
+                Console.Clear();
                 SystemFunction.PrintStatusBar(hero);
                 SystemFunction.PrintGrid(battleField);
                 SystemFunction.PrintStatusHero(hero);
@@ -53,10 +54,8 @@ namespace CMD_Game
                 foreach (Monster monster in monsters)
                 {
                     monster.Move(key, ref battleField);
-                }
-                Console.Clear();
+                }                
             }
-            while (FLAG);
 
 
 

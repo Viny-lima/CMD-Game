@@ -147,13 +147,25 @@ namespace CMD_Game.FunctionsSystem
             }           
         }
 
-        public static void PrintScore(Hero hero)
-        {          
+        public static void PrintScore(Hero hero, bool victory)
+        {
+            if (victory)
+            {
                 Console.Clear();
                 Console.BackgroundColor = ConsoleColor.White;
                 Console.ForegroundColor = ConsoleColor.Black;
-                Console.WriteLine($">>>      SCORE: {hero.points + hero.hp}      <<<");
-                Console.ResetColor();          
+                Console.WriteLine($">>>       VOCÊ VENCEU ! SCORE: {hero.points + hero.hp}      <<<");
+                Console.ResetColor();
+            }
+            else
+            {
+                Console.Clear();
+                Console.BackgroundColor = ConsoleColor.DarkRed;
+                Console.ForegroundColor = ConsoleColor.Black;
+                Console.WriteLine($">>>       VOCÊ PERDEU ! SCORE: {hero.points + hero.hp}      <<<");
+                Console.ResetColor();
+
+            }
         }
 
         public static void PrintStatusHero(Hero hero)
@@ -190,14 +202,14 @@ namespace CMD_Game.FunctionsSystem
                     break;
                 case Hero.StatusHero.victory:
                     Console.WriteLine($" Victory !");
-                    PrintScore(hero);
+                    PrintScore(hero, true);
                     Program.FLAG = false; //ENCERRAR O GAME
                     break;
                 case Hero.StatusHero.GameOver:
                     Console.WriteLine("Game Over !");
-                    PrintScore(hero);
+                    PrintScore(hero, false);
                     Program.FLAG = false; //ENCERRAR O GAME
-                    break;
+                    break;                    
             }
         }
     }
