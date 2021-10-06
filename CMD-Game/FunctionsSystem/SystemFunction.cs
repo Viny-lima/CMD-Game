@@ -85,15 +85,16 @@ namespace CMD_Game.FunctionsSystem
         }
 
 
-        public static void PrintStatusBar(int heroHp, int heroDamage, int heroScore)
+        public static void PrintStatusBar(Hero hero)
         {            
             //Depois usar ref para variáveis  (ref Player.HeroHp)
             CriarLinha(40);
-            Console.WriteLine($"Hero HP:{heroHp} Hero Damage:{heroDamage} Hero Score:{heroScore}".PadLeft(39));
+            Console.WriteLine($"Hero HP:{hero.hp} Hero Damage:{hero.damage} Hero Score:{hero.hp + hero.points}".PadLeft(39));
             CriarLinha(40);
-            if (heroHp <= 0)
+            if (hero.hp <= 0)
             {
                 Program.FLAG = false;
+                PrintScore(hero, false);
             }
         }
 
@@ -157,14 +158,27 @@ namespace CMD_Game.FunctionsSystem
             }            
         }
 
-        public static void PrintScore(Hero hero)
+        public static void PrintScore(Hero hero,bool victory)
         {
-            Console.Clear();
-            Console.BackgroundColor = ConsoleColor.White;
-            Console.ForegroundColor = ConsoleColor.Black;
-            Console.WriteLine($">>>       VOCÊ VENCEU ! SCORE: {hero.points + hero.hp}      <<<");
-            Console.ResetColor();
+          if (victory)
+          {
+                Console.Clear();
+                Console.BackgroundColor = ConsoleColor.White;
+                Console.ForegroundColor = ConsoleColor.Black;
+                Console.WriteLine($">>>       VOCÊ VENCEU ! SCORE: {hero.points + hero.hp}      <<<");
+                Console.ResetColor();
+          }
+          else
+          {
+                Console.Clear();
+                Console.BackgroundColor = ConsoleColor.DarkRed;
+                Console.ForegroundColor = ConsoleColor.Black;
+                Console.WriteLine($">>>       VOCÊ PERDEU ! SCORE: {hero.points + hero.hp}      <<<");
+                Console.ResetColor();
+
+            }
         }
+
 
     }
 }

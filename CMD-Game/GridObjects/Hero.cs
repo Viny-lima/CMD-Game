@@ -7,7 +7,7 @@ namespace CMD_Game.GridObjects
     public class Hero : ObjectGrid
     {
 
-        public Hero() : base(1, 1, GridType.H, 250, 1, 0) { }
+        public Hero() : base(1, 1, GridType.H, 25, 1, 0) { }
         
 
         public void Control(ConsoleKey key, ref ObjectGrid[,] grid)
@@ -105,9 +105,11 @@ namespace CMD_Game.GridObjects
 
                         }
                         grid.SetValue(this, x, y);
-                        Console.Clear();
+                       
                         Program.FLAG = false;
-                        Console.WriteLine("venceu");
+                        SystemFunction.PrintScore(this,true);
+
+
                     }
                         break;
 
@@ -269,9 +271,9 @@ namespace CMD_Game.GridObjects
 
                         }
                         grid.SetValue(this, x, y);
-                        Console.Clear();
+                       
                         Program.FLAG = false;
-                        Console.WriteLine("venceu");
+                        SystemFunction.PrintScore(this,true);
 
 
                     }
