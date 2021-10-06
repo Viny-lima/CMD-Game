@@ -95,7 +95,7 @@ namespace CMD_Game.GridObjects
                 //Mostros batem em Hero
                 if (right._type == GridType.H && right.hp > 2)
                 {
-                    right.hp -= this.damage;
+                    right.hp -= this.damage;                    
                 }
                 if (left._type == GridType.H && right.hp > 2)
                 {

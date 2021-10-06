@@ -6,6 +6,20 @@ namespace CMD_Game.GridObjects
 {
     public class Hero : ObjectGrid
     {
+        public enum StatusHero
+        {
+            none,
+            right,
+            left,
+            top,
+            down,
+            attackMoster,            
+            getPosion,
+            getWeapon,
+            victory
+        }
+
+        public StatusHero status = StatusHero.none;
 
         public Hero() : base(1, 1, GridType.H, 25, 1, 0) { }
         
@@ -40,6 +54,8 @@ namespace CMD_Game.GridObjects
 
                         }
                         grid.SetValue(this, x, y);
+                        status = StatusHero.right;
+                        Console.Clear();                        
                     }
 
                     if(right._type == GridType.W)
@@ -62,6 +78,8 @@ namespace CMD_Game.GridObjects
                         }
                         grid.SetValue(this, x, y);
                         this.damage += right.damage;
+                        status = StatusHero.getWeapon;
+                        Console.Clear();
                     }
                     if (right._type == GridType.P)
                     {
@@ -84,6 +102,8 @@ namespace CMD_Game.GridObjects
                         grid.SetValue(this, x, y);
                         this.hp += right.hp;
                         this.points += right.points;
+                        status = StatusHero.getPosion;
+                        Console.Clear();
 
                     }
                     if (right._type == GridType.D)
@@ -107,11 +127,10 @@ namespace CMD_Game.GridObjects
                         grid.SetValue(this, x, y);
                        
                         Program.FLAG = false;
+                        status = StatusHero.victory;
                         SystemFunction.PrintScore(this,true);
-
-
-                    }
-                        break;
+                    }                    
+                    break;
 
                 case ConsoleKey.A:
                     if (left._type == GridType.O)
@@ -133,6 +152,8 @@ namespace CMD_Game.GridObjects
 
                         }
                         grid.SetValue(this, x, y);
+                        status = StatusHero.left;
+                        Console.Clear();
                     }
 
                     if (left._type == GridType.W)
@@ -155,6 +176,8 @@ namespace CMD_Game.GridObjects
                         }
                         grid.SetValue(this, x, y);
                         this.damage += left.damage;
+                        status = StatusHero.getWeapon;
+                        Console.Clear();
                     }
                     if (left._type == GridType.P)
                     {
@@ -177,11 +200,10 @@ namespace CMD_Game.GridObjects
                         grid.SetValue(this, x, y);
                         this.hp += left.hp;
                         this.points += left.points;
-
+                        status = StatusHero.getPosion;
+                        Console.Clear();
                     }
-
-
-                        break;
+                    break;
 
                 case ConsoleKey.S:
                     if (down._type == GridType.O)
@@ -204,6 +226,8 @@ namespace CMD_Game.GridObjects
 
                         }
                         grid.SetValue(this, x, y);
+                        status = StatusHero.down;
+                        Console.Clear();
                     }
 
                     if (down._type == GridType.W)
@@ -227,6 +251,8 @@ namespace CMD_Game.GridObjects
                         }
                         grid.SetValue(this, x, y);
                         this.damage += down.damage;
+                        status = StatusHero.getWeapon;
+                        Console.Clear();
                     }
                     if (down._type == GridType.P)
                     {
@@ -250,6 +276,8 @@ namespace CMD_Game.GridObjects
                         grid.SetValue(this, x, y);
                         this.hp += down.hp;
                         this.points += down.points;
+                        status = StatusHero.getPosion;
+                        Console.Clear();
                     }
                     if (down._type == GridType.D)
                     {
@@ -273,12 +301,10 @@ namespace CMD_Game.GridObjects
                         grid.SetValue(this, x, y);
                        
                         Program.FLAG = false;
+                        status = StatusHero.victory;
                         SystemFunction.PrintScore(this,true);
-
-
                     }
-
-                        break;
+                    break;
 
                 case ConsoleKey.W:
                     if (top._type == GridType.O)
@@ -300,6 +326,8 @@ namespace CMD_Game.GridObjects
                             }
                         }
                         grid.SetValue(this, x, y);
+                        status = StatusHero.top;
+                        Console.Clear();
                     }  
                     
                     if (top._type == GridType.W)
@@ -322,6 +350,8 @@ namespace CMD_Game.GridObjects
                         }
                         grid.SetValue(this, x, y);
                         this.damage += top.damage;
+                        status = StatusHero.getWeapon;
+                        Console.Clear();
                     }
                     if (top._type == GridType.P)
                     {
@@ -344,9 +374,10 @@ namespace CMD_Game.GridObjects
                         grid.SetValue(this, x, y);
                         this.hp += top.hp;
                         this.points += top.points;
-
+                        status = StatusHero.getPosion;
+                        Console.Clear();
                     }
-                        break;
+                    break;
 
                 case ConsoleKey.Escape:
                     Program.FLAG = false;
@@ -371,10 +402,11 @@ namespace CMD_Game.GridObjects
                     {
                         SystemFunction.Battle((Monster)right, this, grid);
                     }
-                    break;
-
-
+                    status = StatusHero.attackMoster;
+                    Console.Clear();
+                    break;               
             }
+            Console.Clear();
         }
 
 

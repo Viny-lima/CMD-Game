@@ -132,7 +132,6 @@ namespace CMD_Game.FunctionsSystem
                 }
             }
         }
-
         
         
         public static void Battle(Monster monster , Hero hero, ObjectGrid[,] grid)
@@ -150,12 +149,7 @@ namespace CMD_Game.FunctionsSystem
             if (hero.hp > 1)
             {                
                 hero.hp -= monster.damage;                
-            }
-            else
-            {
-                //Se a vida do herói zerar o programa deve fechar
-                Program.FLAG = false;
-            }            
+            }           
         }
 
         public static void PrintScore(Hero hero,bool victory)
@@ -179,6 +173,37 @@ namespace CMD_Game.FunctionsSystem
             }
         }
 
-
+        public static void PrintStatusHero(Hero hero)
+        {
+            switch (hero.status)
+            {
+                case Hero.StatusHero.none:                    
+                    break;
+                case Hero.StatusHero.right:
+                    Console.WriteLine(" To move right");
+                    break;
+                case Hero.StatusHero.left:
+                    Console.WriteLine(" To move left");
+                    break;
+                case Hero.StatusHero.top:
+                    Console.WriteLine(" To move up");
+                    break;
+                case Hero.StatusHero.down:
+                    Console.WriteLine(" To move down");
+                    break;
+                case Hero.StatusHero.attackMoster:
+                    Console.WriteLine(" To attack monster");
+                    break;                
+                case Hero.StatusHero.getPosion:
+                    Console.WriteLine(" To get poison");
+                    break;
+                case Hero.StatusHero.getWeapon:
+                    Console.WriteLine(" To get weapon");
+                    break;
+                case Hero.StatusHero.victory:
+                    Console.WriteLine($" To victory ! {hero.hp + hero.points}");
+                    break;
+            }
+        }
     }
 }

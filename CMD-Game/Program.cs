@@ -41,21 +41,19 @@ namespace CMD_Game
             }
 
             while (FLAG)
-            {
-                Console.Clear();
+            {                
                 SystemFunction.PrintStatusBar(hero);
                 SystemFunction.PrintGrid(battleField);
-                Console.Write("A Posição do hero: " + hero.Position);
-                ConsoleKey key = Console.ReadKey().Key;            
-                
+                SystemFunction.PrintStatusHero(hero);
+                ConsoleKey key = Console.ReadKey().Key;                            
                 hero.Control(key, ref battleField);//Ação do jogador
+
                 //Monstros se movem em posição Aletória 
                 boss.Move(key, ref battleField);
                 foreach (Monster monster in monsters)
                 {
                     monster.Move(key, ref battleField);
                 }
-
             }
             
 
