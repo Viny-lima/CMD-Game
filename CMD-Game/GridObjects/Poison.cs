@@ -5,7 +5,7 @@ namespace CMD_Game.GridObjects
     public class Poison : ObjectGrid
     {       
 
-        public Poison(int x, int y) : base(x, y, GridType.P, 6) { }
+        public Poison(int x, int y) : base(x, y, GridType.P, 7,0,1) { }
         
     }
 }

@@ -42,8 +42,8 @@ namespace CMD_Game
 
             while (FLAG)
             {
-                Console.Clear();                
-                SystemFunction.PrintStatusBar(hero.hp, hero.damage, hero.points);
+                Console.Clear();
+                SystemFunction.PrintStatusBar(hero.hp, hero.damage, (hero.points+hero.hp));
                 SystemFunction.PrintGrid(battleField);
                 Console.Write("A Posição do hero: " + hero.Position);
                 ConsoleKey key = Console.ReadKey().Key;            
